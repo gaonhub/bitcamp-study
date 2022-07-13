@@ -19,6 +19,8 @@ public class App {
     String content = "";
     String writer = "";
     String password = "";
+    int viewCount = 0;
+    long createdDate = 0;
 
     String[] titles = new String[1000];
 
@@ -58,9 +60,14 @@ public class App {
         System.out.printf("번호: %d\n", 1);
         System.out.printf("제목: %s\n", title);
         System.out.printf("내용: %s\n", content);
-        System.out.printf("조회수: %d\n", 100);
+        System.out.printf("조회수: %d\n", viewCount);
         System.out.printf("작성자: %s\n", writer);
-        System.out.printf("등록일: %s\n", "2022-07-08");
+
+        // Date 도구함의 도구를 쓸 수 있도록 데이터를 준비시킨다.
+        new java.util.Date(createdDate); 
+
+        System.out.printf("등록일: %s\n", createdDate);
+
       }  else if (menuNo == 3) {
         System.out.println("[게시글 등록]");
 
@@ -76,6 +83,9 @@ public class App {
         System.out.print("암호? ");
         password = keyboardInput.nextLine();
         
+        viewCount = 0;
+        createdDate = System.currentTimeMillis();
+
       }  else {
         System.out.println("메뉴 번호가 옳지 않습니다!");
       }
