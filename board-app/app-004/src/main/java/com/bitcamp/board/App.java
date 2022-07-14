@@ -9,7 +9,7 @@ public class App {
 
     java.util.Scanner keyboardInput = new java.util.Scanner(System.in);
     
-    int num = 0;
+    int boardNum = 0;
     String title = "";
     String content = "";
     String writer = "";
@@ -21,8 +21,9 @@ public class App {
       System.out.println("메뉴:");
       System.out.println("  1: 게시글 목록");
       System.out.println("  2: 게시글 상세보기");
+      System.out.println("  3: 게시글 등록하기");
       System.out.println();
-      System.out.print("메뉴를 선택하세요[1..2](0: 종료)");
+      System.out.print("메뉴를 선택하세요[1..3](0: 종료)");
       
       int menuNum = keyboardInput.nextInt();
       keyboardInput.nextLine();
@@ -75,7 +76,7 @@ public class App {
         System.out.println("암호?");
         password = keyboardInput.nextLine();
 
-        no = 1;
+        num = 1;
         viewCount = 0;
         createdDate = System.currentTimeMillis();
 
