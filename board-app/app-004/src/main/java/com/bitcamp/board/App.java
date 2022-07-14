@@ -43,7 +43,7 @@ public class App {
         System.out.print("홍길동\t");
         System.out.print("2022-07-13\r\n");
   
-       System.out.print(2 + "\t" + "제목입니다2" + "\t" + 30 + "\t"+ "임꺽정" + "\t" + "2022-07-13\n");
+        System.out.print(2 + "\t" + "제목입니다2" + "\t" + 30 + "\t"+ "임꺽정" + "\t" + "2022-07-13\n");
   
         System.out.println(3 + "\t제목입니다3\t" + 40 + "\t유관순" + "\t2022-07-13");
   
