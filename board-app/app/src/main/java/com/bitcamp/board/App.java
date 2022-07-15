@@ -28,7 +28,7 @@ public class App {
     Prompt.close();
   } // main
 
-  static void welcome() {
+  static void welcome() { 
     System.out.println("[게시판 애플리케이션]");
     System.out.println();
     System.out.println("환영합니다!");
