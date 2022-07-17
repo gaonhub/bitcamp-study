@@ -1,9 +1,9 @@
 package com.bitcamp.board;
 
 public class Prompt {
-  
+    
   static java.util.Scanner keyboardInput = new java.util.Scanner(System.in);
-  
+
   static int inputInt() {
     String str = keyboardInput.nextLine();
     return Integer.parseInt(str);
@@ -27,6 +27,4 @@ public class Prompt {
   static void close() {
     keyboardInput.close();
   }
-
-  
 }

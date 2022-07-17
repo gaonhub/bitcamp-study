@@ -1,4 +1,4 @@
-package com.bitcamp.board;\
+package com.bitcamp.board;
 
 public class Board {
     int no;
