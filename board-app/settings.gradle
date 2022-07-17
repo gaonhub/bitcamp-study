@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'board-app'
-include('app')
+include('app','app-001','app-002','app-003','app-004','app-005','app-006','app-007','app-008')
