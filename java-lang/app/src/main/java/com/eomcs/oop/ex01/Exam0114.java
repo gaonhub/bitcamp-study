@@ -19,6 +19,14 @@ public class Exam0114 {
     Score s = createScore("홍길동", 100, 100, 100);
 
     printScore(s);
+
+    Score s2 = createScore("임꺽정", 90, 80,70);
+
+    printScore(s2);
+
+    Score s3 = createScore("유관순", 80, 70, 60);
+
+    printScore(s3);
   }
 
   static void printScore(Score s) {
