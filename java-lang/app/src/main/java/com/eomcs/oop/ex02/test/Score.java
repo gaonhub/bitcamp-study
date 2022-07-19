@@ -1,6 +1,7 @@
 package com.eomcs.oop.ex02.test;
 
 public class Score {
+
   String name;
   int kor;
   int eng;
