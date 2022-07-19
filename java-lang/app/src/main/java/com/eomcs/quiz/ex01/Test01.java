@@ -18,14 +18,14 @@ public class Test01 {
   }
 
   static int countBits(int value) {
-    int count = 0;
-    // 이 메서드를 완성하시오!
+    int r = 0;
+
     while (value != 0) {
-      count += (value & 1);
-      value = value >>> 1;
+      r += (value & 1);
+      value >>>= 1;
     }
-    
-    return count;
+
+    return r;
   }
 
 }
