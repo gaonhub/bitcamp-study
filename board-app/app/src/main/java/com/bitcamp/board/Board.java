@@ -8,5 +8,5 @@ public class Board {
   String writer;
   String password;
   int viewCount;
-  long createdDate; 
-}  
+  long createdDate;
+}
