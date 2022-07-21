@@ -25,10 +25,13 @@ public class App {
           BoardHandler.execute();
           break;
         case 2: // 독서록
+          ReadingHandler.execute();
           break;
         case 3: // 방명록
+          VisitHandler.execute();
           break;
         case 4: // 공지사항
+          NoticeHandler.execute();
           break;
         default: System.out.println("메뉴 번호가 옳지 않습니다!");
       } // switch
