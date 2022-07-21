@@ -5,12 +5,12 @@ package com.bitcamp.board;
 
 public class NoticeHandler {
 
-  static int boardCount = 0; 
+  static int boardCount = 0; // 저장된 게시글의 개수
 
-  static final int DEFAUILT_SIZE = 3;
+  static final int SIZE = 3;
 
   // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 만든다.
-  static Board[] boards = new Board[DEFAUILT_SIZE];
+  static Board[] boards = new Board[SIZE];
 
   static void execute() {
     while (true) {

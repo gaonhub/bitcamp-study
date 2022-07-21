@@ -5,12 +5,11 @@ package com.bitcamp.board;
 
 public class ReadingHandler {
 
-  static int boardCount = 0; 
+  static int boardCount = 0; // 
 
-  static final int DEFAUILT_SIZE = 3;
+  static final int SIZE = 3;
 
-  // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 만든다.
-  static Board[] boards = new Board[DEFAUILT_SIZE];
+  static Board[] boards = new Board[SIZE];
 
   static void execute() {
     while (true) {
@@ -86,7 +85,7 @@ public class ReadingHandler {
 
     // 사용자가 입력한 번호에 해당하는 게시글을 못 찾았다면
     if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다!");
+      System.out.println("해당 번호의 독서록이 없습니다!");
       return;
     }
 

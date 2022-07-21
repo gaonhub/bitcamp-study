@@ -3,18 +3,18 @@
  */
 package com.bitcamp.board;
 
-public class VisitHandler {
+public class BoardHandler {
 
-  static int boardCount = 0; 
+  static int boardCount = 0; // 저장된 게시글의 개수
 
-  static final int DEFAUILT_SIZE = 3;
+  static final int SIZE = 3;
 
   // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 만든다.
-  static Board[] boards = new Board[DEFAUILT_SIZE];
+  static Board[] boards = new Board[SIZE];
 
   static void execute() {
     while (true) {
-      System.out.println("방명록:");
+      System.out.println("게시판:");
       System.out.println("  1: 목록");
       System.out.println("  2: 상세보기");
       System.out.println("  3: 등록");
@@ -27,11 +27,11 @@ public class VisitHandler {
 
       switch (menuNo) {
         case 0: return;
-        case 1: VisitHandler.processList(); break;
-        case 2: VisitHandler.processDetail(); break;
-        case 3: VisitHandler.processInput(); break;
-        case 4: VisitHandler.processDelete(); break;
-        case 5: VisitHandler.processUpdate(); break;
+        case 1: BoardHandler.processList(); break;
+        case 2: BoardHandler.processDetail(); break;
+        case 3: BoardHandler.processInput(); break;
+        case 4: BoardHandler.processDelete(); break;
+        case 5: BoardHandler.processUpdate(); break;
         default: System.out.println("메뉴 번호가 옳지 않습니다!");
       }
 
@@ -52,7 +52,7 @@ public class VisitHandler {
     java.text.SimpleDateFormat formatter = 
         new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-    System.out.println("[방명록 목록]");
+    System.out.println("[게시글 목록]");
     System.out.println("번호 제목 조회수 작성자 등록일");
 
     for (int i = 0; i < boardCount; i++) {
@@ -71,7 +71,7 @@ public class VisitHandler {
   }
 
   static void processDetail() {
-    System.out.println("[방명록 상세보기]");
+    System.out.println("[게시글 상세보기]");
 
     int boardNo = Prompt.inputInt("조회할 게시글 번호? ");
 
@@ -101,16 +101,12 @@ public class VisitHandler {
   }
 
   static void processInput() {
-    System.out.println("[방명록 등록]");
+    System.out.println("[게시글 등록]");
 
-    // 배열의 크기를 초과하면 배열 크기를 50% 증가시킨다.
-    if (boardCount == boards.length) {
-      int newSize = boards.length + (boards.length >> 1);
-      Board[] newArray = new Board[newSize];
-      for (int i = 0; i < boards.length; i++) {
-        newArray[i] = boards[i];
-      }
-      boards = newArray;
+    // 배열의 크기를 초과하지 않았는지 검사한다
+    if (boardCount == SIZE) {
+      System.out.println("게시글을 더이상 저장할 수 없습니다.");
+      return;
     }
 
     Board board = new Board();
@@ -133,7 +129,7 @@ public class VisitHandler {
   }
 
   static void processDelete() {
-    System.out.println("[방명록 삭제]");
+    System.out.println("[게시글 삭제]");
 
     int boardNo = Prompt.inputInt("삭제할 게시글 번호? ");
 
@@ -165,7 +161,7 @@ public class VisitHandler {
   }
 
   public static void processUpdate() {
-    System.out.println("[방명록 변경]");
+    System.out.println("[게시글 변경]");
 
     int boardNo = Prompt.inputInt("변경할 게시글 번호? ");
 
