@@ -3,7 +3,7 @@
  */
 package com.bitcamp.board;
 
-public class BoardHandler {
+public class NoticeHandler {
 
   static int boardCount = 0; // 저장된 게시글의 개수
 
@@ -12,12 +12,47 @@ public class BoardHandler {
   // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 만든다.
   static Board[] boards = new Board[SIZE];
 
+  static void execute() {
+    while (true) {
+      System.out.println("공지사항:");
+      System.out.println("  1: 목록");
+      System.out.println("  2: 상세보기");
+      System.out.println("  3: 등록");
+      System.out.println("  4: 삭제");
+      System.out.println("  5: 변경");
+      System.out.println();
+
+      int menuNo = Prompt.inputInt("메뉴를 선택하세요[1..5](0: 이전) ");
+      displayHeadline();
+
+      switch (menuNo) {
+        case 0: return;
+        case 1: NoticeHandler.processList(); break;
+        case 2: NoticeHandler.processDetail(); break;
+        case 3: NoticeHandler.processInput(); break;
+        case 4: NoticeHandler.processDelete(); break;
+        case 5: NoticeHandler.processUpdate(); break;
+        default: System.out.println("메뉴 번호가 옳지 않습니다!");
+      }
+
+      displayBlankLine();
+    } // 게시판 while
+  }
+
+  static void displayHeadline() {
+    System.out.println("=========================================");
+  }
+
+  static void displayBlankLine() {
+    System.out.println(); // 메뉴를 처리한 후 빈 줄 출력
+  }
+
   static void processList() {
     // 날짜 정보에서 값을 추출하여 특정 포맷의 문자열로 만들어줄 도구를 준비
     java.text.SimpleDateFormat formatter = 
         new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-    System.out.println("[게시글 목록]");
+    System.out.println("[공지사항 목록]");
     System.out.println("번호 제목 조회수 작성자 등록일");
 
     for (int i = 0; i < boardCount; i++) {
@@ -36,7 +71,7 @@ public class BoardHandler {
   }
 
   static void processDetail() {
-    System.out.println("[게시글 상세보기]");
+    System.out.println("[공지사항 상세보기]");
 
     int boardNo = Prompt.inputInt("조회할 게시글 번호? ");
 
@@ -66,12 +101,16 @@ public class BoardHandler {
   }
 
   static void processInput() {
-    System.out.println("[게시글 등록]");
+    System.out.println("[공지사항 등록]");
 
-    // 배열의 크기를 초과하지 않았는지 검사한다
-    if (boardCount == SIZE) {
-      System.out.println("게시글을 더이상 저장할 수 없습니다.");
-      return;
+    // 배열의 크기를 초과하면 배열 크기를 50% 증가시킨다.
+    if (boardCount == boards.length) {
+      int newSize = boards.length + (boards.length >> 1);
+      Board[] newArray = new Board[newSize];
+      for (int i = 0; i < boards.length; i++) {
+        newArray[i] = boards[i];
+      }
+      boards = newArray;
     }
 
     Board board = new Board();
@@ -94,7 +133,7 @@ public class BoardHandler {
   }
 
   static void processDelete() {
-    System.out.println("[게시글 삭제]");
+    System.out.println("[공지사항 삭제]");
 
     int boardNo = Prompt.inputInt("삭제할 게시글 번호? ");
 
@@ -126,7 +165,7 @@ public class BoardHandler {
   }
 
   public static void processUpdate() {
-    System.out.println("[게시글 변경]");
+    System.out.println("[공지사항 변경]");
 
     int boardNo = Prompt.inputInt("변경할 게시글 번호? ");
 
