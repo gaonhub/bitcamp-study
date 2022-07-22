@@ -7,45 +7,10 @@ public class BoardHandler {
 
   static int boardCount = 0; // 저장된 게시글의 개수
 
-  static final int DEFAULT_SIZE = 3;
+  static final int SIZE = 3;
 
   // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 만든다.
-  static Board[] boards = new Board[DEFAULT_SIZE];
-
-  static void execute() {
-    while (true) {
-      System.out.println("게시판:");
-      System.out.println("  1: 목록");
-      System.out.println("  2: 상세보기");
-      System.out.println("  3: 등록");
-      System.out.println("  4: 삭제");
-      System.out.println("  5: 변경");
-      System.out.println();
-
-      int menuNo = Prompt.inputInt("메뉴를 선택하세요[1..5](0: 이전) ");
-      displayHeadline();
-
-      switch (menuNo) {
-        case 0: return;
-        case 1: BoardHandler.processList(); break;
-        case 2: BoardHandler.processDetail(); break;
-        case 3: BoardHandler.processInput(); break;
-        case 4: BoardHandler.processDelete(); break;
-        case 5: BoardHandler.processUpdate(); break;
-        default: System.out.println("메뉴 번호가 옳지 않습니다!");
-      }
-
-      displayBlankLine();
-    } // 게시판 while
-  }
-
-  static void displayHeadline() {
-    System.out.println("=========================================");
-  }
-
-  static void displayBlankLine() {
-    System.out.println(); // 메뉴를 처리한 후 빈 줄 출력
-  }
+  static Board[] boards = new Board[SIZE];
 
   static void processList() {
     // 날짜 정보에서 값을 추출하여 특정 포맷의 문자열로 만들어줄 도구를 준비
@@ -103,22 +68,10 @@ public class BoardHandler {
   static void processInput() {
     System.out.println("[게시글 등록]");
 
-    // 배열의 크기를 초과하면 배열 크기를 50% 증가시킨다.
-    if (boardCount == boards.length) {
-
-      // 새로 만들 배열의 크기를 계산한다.
-      int newSize = boards.length + (boards.length >> 1);
-
-      // 새 배열 준비
-      Board[] newArray = new Board[newSize];
-
-      // 기존 배열의 값을 새 배열에 넣는다.
-      for (int i = 0; i < boards.length; i++) {
-        newArray[i] = boards[i];
-      }
-
-      // 기존 배열(주소)을 버리고 새 배열(주소)을 사용한다.
-      boards = newArray;
+    // 배열의 크기를 초과하지 않았는지 검사한다
+    if (boardCount == SIZE) {
+      System.out.println("게시글을 더이상 저장할 수 없습니다.");
+      return;
     }
 
     Board board = new Board();
