@@ -18,7 +18,6 @@ public class MemberList extends ObjectList {
     member.no = nextNo();
     super.add(obj);
   }
-
   @Override
   public Member get(int memberNo) {
     int index = -1;

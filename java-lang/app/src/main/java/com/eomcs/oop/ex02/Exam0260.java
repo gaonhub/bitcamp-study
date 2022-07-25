@@ -41,6 +41,11 @@ public class Exam0260 {
       return a >= 0 ? a : a * -1;
     }
   }
+  
+  class c {
+    Calculator p = new Calculator();
+    p.plus(3);
+  }
 
   public static void main(String[] args) {
     // 다음 두 개의 식을 분리하여 계산해 보자!
