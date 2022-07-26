@@ -23,6 +23,7 @@ by multiplying the previous one by a fixed, non-zero number.
 Example
 
 isGeometricProgression([1, 4, 16]) = true
+
 isGeometricProgression([2, 4, 8, 17, 34]) = false
 [input] array.integer sequence
 
@@ -40,11 +41,17 @@ public class Test04 {
   public static void main(String[] args) {
     System.out.println(isGeometricProgression(new int[]{1,4,16}) == true);
     System.out.println(isGeometricProgression(new int[]{2,4,8,17,34}) == false);
+    System.out.println(isGeometricProgression(new int[]{1,2,4,8}) == true);
 
   }
 
   static boolean isGeometricProgression(int[] sequence) {
     // 이 메서드를 완성하시오!
+    for (int i = 2; i < sequence.length; i++) {
+      if (sequence[i] * sequence[0] != sequence[i - 1] * sequence[1]) {
+        return false;
+      }
+    }
     return true;
   }
 }
