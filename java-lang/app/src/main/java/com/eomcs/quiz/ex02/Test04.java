@@ -42,6 +42,7 @@ public class Test04 {
     System.out.println(isGeometricProgression(new int[]{1,4,16}) == true);
     System.out.println(isGeometricProgression(new int[]{2,4,8,17,34}) == false);
     System.out.println(isGeometricProgression(new int[]{1,2,4,8}) == true);
+    System.out.println(isGeometricProgression(new int[]{2,6,18,54,162}) == true);
 
   }
 
