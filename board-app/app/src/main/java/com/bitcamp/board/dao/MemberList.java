@@ -22,49 +22,20 @@ public class MemberList extends ObjectList {
     return null;
   }
 
-  public void add(Member member) {
-    if (this.memberCount == this.members.length) {
-      grow();
-    }
-    member.no = nextNo();
-    this.members[this.memberCount++] = member;
-  }
-
-  @Override
-  public boolean remove(int memberNo) {
-    int memberIndex = -1;
-    for (int i = 0; i < this.memberCount; i++) {
-      if (this.members[i].no == memberNo) {
-        memberIndex = i;
-        break;
+  // 인덱스 대신 이메일로 회원 데이터를 찾아 삭제하는 메서드.
+  // 수퍼 클래스로부터 상속 받은 메서도와 같은 일을 하며 
+  // 메서드 이름도 같다. 오버로딩!
+  public boolean remove(String email) {
+    for (int i = 0; i < size(); i++) {
+      Member member = (Member) get(i);
+      if (member.email.equals(email)) {
+        remove(i);
+        return remove(i);
       }
     }
-
-    if (memberIndex == -1) {
-      return false;
-    }
-
-    for (int i = memberIndex + 1; i < this.memberCount; i++) {
-      this.members[i - 1] = this.members[i];
-    }
-
-    this.members[--this.memberCount] = null;
-
-    return true;
+    return false;
   }
 
-  private void grow() {
-    int newSize = this.members.length + (this.members.length >> 1);
-    Member[] newArray = new Member[newSize];
-    for (int i = 0; i < this.members.length; i++) {
-      newArray[i] = this.members[i];
-    }
-    this.members = newArray;
-  }
-
-  private int nextNo() {
-    return ++no;
-  }
 }
 
 
