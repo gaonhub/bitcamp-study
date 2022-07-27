@@ -1,37 +1,22 @@
 package com.bitcamp.board.dao;
 
 import com.bitcamp.board.domain.Member;
+import com.bitcamp.util.ObjectList;
 
 // 회원 목록을 관리하는 역할
 //
-public class MemberList {
+public class MemberList extends ObjectList {
 
-  private static final int DEFAULT_SIZE = 3;
-
-  private int memberCount; 
-  private Member[] members; 
-  private int no = 0;
-
-  public MemberList() {
-    this.members = new Member[DEFAULT_SIZE];
-  }
-
-  public MemberList(int initCapacity) {
-    this.members = new Member[initCapacity];
-  }
-
-  public Member[] toArray() {
-    Member[] arr = new Member[this.memberCount];
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = this.members[i];
-    }
-    return arr;
-  }
-
-  public Member get(int memberNo) {
-    for (int i = 0; i < this.memberCount; i++) {
-      if (this.members[i].no == memberNo) {
-        return this.members[i];
+  // 인덱스 대신 이메일로 회원 데이터를 찾을 수 있도록 
+  // 메서드를 추가한다.
+  // 기존의 메서드와 같은 이름으로 지어서
+  // 프로그램 메서드 호출할 때 일관되게 사용할 수 있다. 
+  // => 오버로딩(Overloading)
+  public Member get(String email) {
+    for (int i = 0; i < size(); i++) {
+      Member member = (Member) get(i);
+      if (member.email.equals(email)) {
+        return member;
       }
     }
     return null;
@@ -45,6 +30,7 @@ public class MemberList {
     this.members[this.memberCount++] = member;
   }
 
+  @Override
   public boolean remove(int memberNo) {
     int memberIndex = -1;
     for (int i = 0; i < this.memberCount; i++) {
