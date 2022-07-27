@@ -1,17 +1,16 @@
 package com.bitcamp.util;
 
 public class ObjectList {
-
   private static final int DEFAULT_CAPACITY = 10;
 
-  private int size;
+  private int size; 
   private Object[] elementData;
 
-  public ObjectList() {
-    elementData = new Object[DEFAULT_CAPACITY];
+  public void ObjectList() {
+    elementData = new Object[size];
   }
 
-  public ObjectList(int initialCapacity) {
+  public void ObjectList(int initialCapacity) {
     elementData = new Object[initialCapacity];
   }
 
@@ -19,6 +18,7 @@ public class ObjectList {
     if (size == elementData.length) {
       grow();
     }
+
     elementData[size++] = e;
   }
 
@@ -34,29 +34,22 @@ public class ObjectList {
     if (index < 0 || index >= size) {
       return null;
     }
-
     return elementData[index];
-  }
-
-  public boolean remove(int index) {
-    if (index < 0  || index >= size) {
-      return false;
-    }
-
-    // 삭제할 항목의 다음 항목을 앞으로 당긴다.
-    for (int i = index + 1; i < size; i++) {
-      elementData[i - 1] = elementData[i];
-    }
-
-    // 목록 개수를 한 개 줄인 후 
-    // 맨 뒤의 있던 항목의 주소를 0으로 설정한다.
-    elementData[--size] = null;
-
-    return true;
   }
 
   public int size() {
     return size;
+  }
+
+  public boolean remove(int index) {
+    if (index < 0 || index >= size) {
+      return false;
+    }
+    for (int i = index + 1; i < size; i++) {
+      elementData[i - 1] = elementData[i];
+    }
+    elementData[--size] = null;
+    return true;
   }
 
   private void grow() {
