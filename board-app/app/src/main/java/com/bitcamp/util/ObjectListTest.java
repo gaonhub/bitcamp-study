@@ -1,7 +1,7 @@
 package com.bitcamp.util;
 
 public class ObjectListTest {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Throwable {
     ObjectList list = new ObjectList();
 
     list.add("홍길동");
@@ -28,7 +28,9 @@ public class ObjectListTest {
     // - 알 수 없다.
     // - 리턴 값으로는 정상과 예외 사황을 표현할 수 없다.
     // - 리턴 값으로 두 상황을 구분할 수 없다.
-    //
+    // 해겨책!
+    // - 정상적인 경우는 정상적으로 해당 값을 리턴한다.
+    // - 예외 상황일 경우에는 예외 정보를 던진다. 예외를 발생시킨다.
 
 
   }
