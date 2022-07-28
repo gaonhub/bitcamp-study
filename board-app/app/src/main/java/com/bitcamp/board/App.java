@@ -64,6 +64,7 @@ public class App {
         System.out.println("입력 값이 옳지 않습니다.");
       }
 
+
     } // while
 
     System.out.println("안녕히 가세요!");
