@@ -24,7 +24,4 @@ public class ListException extends RuntimeException {
   public ListException(Throwable cause) {
     super(cause);
   }
-
-
-
 }

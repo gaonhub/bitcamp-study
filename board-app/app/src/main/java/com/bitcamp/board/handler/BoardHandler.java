@@ -163,7 +163,7 @@ public class BoardHandler {
       try {
         boardNo = Prompt.inputInt("변경할 게시글 번호? ");
         break;
-      } catch (Exception ex) {
+      } catch (Throwable ex) {
         System.out.println("입력 값이 옳지 않습니다!");
       }
     }

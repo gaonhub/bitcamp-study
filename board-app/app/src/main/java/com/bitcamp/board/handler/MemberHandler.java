@@ -37,6 +37,7 @@ public class MemberHandler {
         }
 
         displayBlankLine();
+
       } catch (Exception ex) {
         System.out.printf("예외 발생: %s\n", ex.getMessage());
       }
@@ -81,7 +82,6 @@ public class MemberHandler {
     System.out.printf("이메일: %s\n", member.email);
     Date date = new Date(member.createdDate);
     System.out.printf("등록일: %tY-%1$tm-%1$td %1$tH:%1$tM\n", date);
-
   }
 
   private void onInput() {
