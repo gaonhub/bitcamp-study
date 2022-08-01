@@ -36,7 +36,9 @@ public class Test13 {
 
   static int sumOfMultiples(int n, int k) {
     int result = 0;
-    // 이 메서드를 완성하시오!
+    for (int i = k; i <= n; k++) { // k의 배수
+      result += i;
+    }
     return result;
   }
 }
