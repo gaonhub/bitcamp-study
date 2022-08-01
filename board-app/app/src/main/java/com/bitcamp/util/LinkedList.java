@@ -7,7 +7,6 @@ public class LinkedList {
   private int size;
 
   public void append(Object value) {
-
     Node node = new Node(value);
 
     size++;
@@ -24,6 +23,7 @@ public class LinkedList {
   }
 
   public Object retrieve(int index) {
+
     if (index < 0 || index >= size) {
       throw new ListException("유효한 인덱스가 아닙니다!");
     }
@@ -34,10 +34,11 @@ public class LinkedList {
       cursor = cursor.next;
     }
 
-    return cursor.value;
+    return cursor.value;    
   }
 
   public Object delete(int index) {
+
     if (index < 0 || index >= size) {
       throw new ListException("유효한 인덱스가 아닙니다!");
     }
@@ -79,7 +80,6 @@ public class LinkedList {
     cursor.next = null;
 
     return deleted;
-
 
   }
 
