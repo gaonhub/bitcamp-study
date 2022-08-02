@@ -56,15 +56,7 @@ public class Test12 {
   }
 
   static boolean isInsideTheCircle(int xa, int ya, int xc, int yc, int rc) {
-    int result = 0;
-    int xradius = xa - xc;
-    int yradius = ya - yc;
-    result = xradius * xradius + yradius* yradius;
-    if (result <= rc) {
-      return true;
-    } else {
-
-      return false;
-    }
+    // 이 메서드를 완성하시오!
+    return false;
   }
 }

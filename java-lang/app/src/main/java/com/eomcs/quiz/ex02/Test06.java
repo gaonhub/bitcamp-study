@@ -40,9 +40,7 @@ public class Test06 {
   }
 
   static String properOrImproper(int[] A) {
-    if (Math.abs(A[0] / A[1]) < 1) {
-      return "Proper";
-    }
+    // 이 메서드를 완성하시오!
     return "Improper";
   }
 
