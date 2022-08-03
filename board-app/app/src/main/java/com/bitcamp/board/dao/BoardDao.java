@@ -52,16 +52,12 @@ public class BoardDao {
 
   public Board[] findAll() {
 
-    // 의존 객체 ObjectList를 이용하여 목록에 저장된 게시글을 가져온다.
     Object[] arr = list.toArray();
-
-    // Object[] 배열에 담긴 인스턴스 목록을 Board[] 배열에 담아 리턴한다.
     Board[] boards = new Board[arr.length];
 
     for (int i = 0; i < arr.length; i++) {
       boards[i] = (Board) arr[i];
     }
-
     return boards;
   }
 
