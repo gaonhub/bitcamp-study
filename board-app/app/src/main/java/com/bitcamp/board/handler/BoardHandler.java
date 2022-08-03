@@ -8,9 +8,10 @@ import java.util.Date;
 import com.bitcamp.board.App;
 import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.domain.Board;
+import com.bitcamp.handler.Handler;
 import com.bitcamp.util.Prompt;
 
-public class BoardHandler {
+public class BoardHandler implements Handler{
 
   // 게시글 목록을 관리할 객체 준비
   private BoardDao boardDao = new BoardDao();
@@ -38,12 +39,13 @@ public class BoardHandler {
         if (menuNo < 0 || menuNo > menus.length) {
           System.out.println("메뉴 번호가 옳지 않습니다!");
           continue; // while 문의 조건 검사로 보낸다.
+
         } else if (menuNo == 0) {
           return; // 메인 메뉴로 돌아간다.
         }
 
         // 메뉴에 진입할 때 breadcrumb 메뉴바에 그 메뉴를 등록한다.
-        App.breadcrumbMenu.push(menus[menuNo - 1]);   
+        App.breadcrumbMenu.push(menus[menuNo - 1]);
 
         displayHeadline();
 
@@ -78,7 +80,6 @@ public class BoardHandler {
 
   private void onList() {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
 
     System.out.println("번호 제목 조회수 작성자 등록일");
 
