@@ -1,6 +1,5 @@
 package com.bitcamp.util;
 
-
 public class ObjectList extends AbstractList {
 
   private static final int DEFAULT_CAPACITY = 10;
