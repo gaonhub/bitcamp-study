@@ -37,10 +37,15 @@ public class Test18 {
 
   public static void main(String[] args) {
     System.out.println( maxDivisor(2, 17, 4));
+    System.out.println( maxDivisor(4, 20, 7));
   }
 
   static int maxDivisor(int left, int right, int divisor) {
-    // 이 메서드를 완성하시오!
+    for (int i = right; i >= left; i--) {
+      if (i % divisor == 0) {
+        return i;
+      }
+    }
     return -1;
   }
 }
