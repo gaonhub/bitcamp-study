@@ -31,7 +31,9 @@ public class Test17 {
   }
 
   static int nearestRoundNumber(int value) {
-    // 이 메서드를 완성하시오!
+    while (value % 10 != 0) {
+      value++;
+    }
     return value;
   }
 }
