@@ -26,7 +26,6 @@ public class MemberHandler extends AbstractHandler {
       case 4: this.onDelete(); break;
       case 5: this.onUpdate(); break;
     }
-
   }
 
   private void onList() {

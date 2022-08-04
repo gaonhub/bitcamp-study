@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import com.bitcamp.board.domain.Board;
 
-
 // 게시글 목록을 관리하는 역할
 //
 public class BoardDao {

@@ -20,9 +20,9 @@ public class BoardHandler extends AbstractHandler {
     super(new String[] {"목록", "상세보기", "등록", "삭제", "변경"});
   }
 
-  // 템플릿 메서드 패턴(template method pattern)
+  // 템플릿 메서드 패턴(template method pattern) 
   //   - 수퍼 클래스의 execute()에서 동작의 전체적인 흐름을 정의하고(틀을 만들고),
-  //   - 서브 클래스의 service()에서 동작을 구체적으로 정의한다(세부적인 항목을 구현한다).
+  //   - 서브 클래스의 service()에서 동작을 구제척으로 정의한다.(세부적인 항목을 구현한다)
   @Override
   public void service(int menuNo) {
     switch (menuNo) {
