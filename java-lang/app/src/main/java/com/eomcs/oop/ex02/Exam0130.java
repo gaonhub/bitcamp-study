@@ -2,9 +2,9 @@ package com.eomcs.oop.ex02;
 
 //0) 낱개 변수 사용
 //1) 성적 데이터를 저장할 사용자 정의 데이터 타입을 만든다.
-//2) 리팩토링: 메서드 추출(extract method), static nested class 
+//2) 리팩토링: 메서드 추출(extract method), static nested class
 //3) 리팩토링: 메서드 추출(extract method) = 한 개의 메서드는 한 개의 기능을 수행해야 한다.
-//
+// 
 public class Exam0130 {
 
   static class Score {
@@ -42,11 +42,11 @@ public class Exam0130 {
     s3.math = 65;
     compute(s3);
     printScore(s3);
-
   }
 
   static void printScore(Score s) {
-    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", s.name, s.kor, s.eng, s.math, s.sum, s.aver);
+    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", 
+        s.name, s.kor, s.eng, s.math, s.sum, s.aver);
   }
 
   static void compute(Score s) {
@@ -54,4 +54,6 @@ public class Exam0130 {
     s.aver = (float) s.sum / 3;
   }
 }
+
+
 

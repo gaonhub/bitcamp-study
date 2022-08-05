@@ -27,13 +27,7 @@ public class Test20 {
   }
 
   static int maxDigit(int n) {
-    int result = 0;
-    while (n > 0) {
-      if ((n % 10) > result) {
-        result = n % 10;
-      }
-      n /= 10;
-    }
-    return result;
+    // 이 메서드를 완성하시오!
+    return 0;
   }
 }

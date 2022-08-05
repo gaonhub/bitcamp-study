@@ -38,17 +38,8 @@ public class Test08 {
     System.out.println(avoidObstacles(new int[]{5,3,6,7,9,13,11}) == 4);
   }
 
-  static int avoidObstacles(int[] inputArray) { 
-    for (int jumping = 1; ; jumping++) {
-
-      for (int i = 0; i < inputArray.length; i++) {
-        if (inputArray[i] % jumping == 0) {
-          break;
-        }
-
-        if (i == inputArray.length - 1)
-          return jumping;
-      }
-    }
+  static int avoidObstacles(int[] inputArray) {
+    // 이 메서드를 완성하시오!
+    return 0;
   }
 }

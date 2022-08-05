@@ -9,7 +9,7 @@ public class Score2 {
   public int sum;
   public float aver;
 
-  // new 연산자를 이용하여 인스턴스를 만들 때 자동으로 호출되는 메서드
+  // new 연산자를 이용하여 인스턴스를 만들 때 자동으로 호출되는 특별한 문법의 메서드
   // => 생성자(constructor)
   //    - 메서드명은 클래스 이름과 같아야 한다.
   //    - 리턴 타입은 없다.

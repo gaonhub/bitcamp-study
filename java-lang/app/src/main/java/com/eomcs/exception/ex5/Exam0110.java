@@ -8,6 +8,7 @@ public class Exam0110 {
 
   static Board read() {
     Scanner keyScan = new Scanner(System.in);
+
     Board board = new Board();
 
     System.out.print("번호> ");
@@ -22,7 +23,7 @@ public class Exam0110 {
     System.out.print("등록일> ");
     board.setCreatedDate(Date.valueOf(keyScan.nextLine()));
 
-    keyScan.close(); // 개발자가 직접 자원을 해제시킨다.
+    keyScan.close(); // 개발자가 직접 자원을 해제시킨다. 
     // 주의!
     // => close()를 호출하기 전에 예외가 발생한다면,
     //    Scanner 자원이 해제되지 못한다.

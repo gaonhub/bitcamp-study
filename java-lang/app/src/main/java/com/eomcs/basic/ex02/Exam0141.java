@@ -2,6 +2,7 @@
 package com.eomcs.basic.ex02;
 
 public class Exam0141 {
+
   public static void main(String[] args) {
 
     Object obj = new String("Hello"); // 인스턴스 주소가 100이라 가정하자;

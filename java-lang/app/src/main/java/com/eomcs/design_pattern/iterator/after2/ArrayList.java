@@ -102,7 +102,7 @@ public class ArrayList<E> {
   }
 
   // static nested class(스태틱 중첩 클래스)
-  static class ArrayListIterator<E> implements Iterator<E>{
+  static class ArrayListIterator<E> implements Iterator<E> {
 
     ArrayList<E> list;
     int index = 0;
@@ -121,7 +121,6 @@ public class ArrayList<E> {
       return list.get(index++);
     }
   }
-
 }
 
 

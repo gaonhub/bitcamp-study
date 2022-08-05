@@ -33,7 +33,7 @@ public class Test15x {
 
   public static void main(String[] args) {
     System.out.println(isTandemRepeat("abcdeabcde")); // true
-    System.out.println(isTandemRepeat("qq")); // false
+    System.out.println(isTandemRepeat("qqq")); // false
     System.out.println(isTandemRepeat("2w2www")); // false
   }
 

@@ -12,25 +12,6 @@ package com.eomcs.oop.ex02.test;
 //
 public class ExamTest2 {
 
-
-  static class Calculator {
-    static int plus(int a, int b) {
-      return a + b;
-    }
-  
-    static int minus(int a, int b) {
-      return a - b;
-    }
-  
-    static int multiple(int a, int b) {
-      return a * b;
-    }
-  
-    static int divide(int a, int b) {
-      return a / b;
-    }
-  }
-
   public static void main(String[] args) {
     // 다음 식을 연산자 우선 순위를 고려하지 않고 순서대로 계산하라!
     // 2 + 3 - 1 * 7 / 3 = ?
@@ -48,7 +29,21 @@ public class ExamTest2 {
     System.out.printf("result = %d\n", result);
   }
 
+  static int plus(int a, int b) {
+    return a + b;
+  }
 
+  static int minus(int a, int b) {
+    return a - b;
+  }
+
+  static int multiple(int a, int b) {
+    return a * b;
+  }
+
+  static int divide(int a, int b) {
+    return a / b;
+  }
 }
 // 클래스 문법의 용도?
 // 1) 사용자 정의 데이터 타입 만들 때
