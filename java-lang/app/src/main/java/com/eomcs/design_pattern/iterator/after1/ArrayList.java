@@ -1,4 +1,4 @@
-package com.eomcs.design_pattern.iterator.before;
+package com.eomcs.design_pattern.iterator.after1;
 
 public class ArrayList<E> {
 
@@ -94,6 +94,11 @@ public class ArrayList<E> {
       temp[i] = this.arr[i];
     }
     arr = temp;
+  }
+
+  // Iterator 구현체를 제공한다.
+  public Iterator<E> iterator() {
+    return new ArrayListIterator<E>(this);
   }
 }
 

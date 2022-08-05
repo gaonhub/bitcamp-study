@@ -1,4 +1,4 @@
-package com.eomcs.design_pattern.iterator.before;
+package com.eomcs.design_pattern.iterator.after1;
 
 public class LinkedList<E> {
 
@@ -170,6 +170,11 @@ public class LinkedList<E> {
     Node(E value) {
       this.value = value;
     }
+  }
+
+  // Iterator 구현체를 제공한다.
+  public Iterator<E> iterator() {
+    return new LinkedListIterator<E>(this);
   }
 
 }

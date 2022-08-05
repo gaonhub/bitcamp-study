@@ -1,4 +1,4 @@
-package com.eomcs.design_pattern.iterator.before;
+package com.eomcs.design_pattern.iterator.after2;
 
 public class Queue<E> extends LinkedList<E> {
 
@@ -12,6 +12,12 @@ public class Queue<E> extends LinkedList<E> {
 
   public boolean empty() {
     return this.size == 0;
+  }
+
+  // Iterator 구현체를 제공한다.
+  @Override
+  public Iterator<E> iterator() {
+    return new QueueIterator<E>(this);
   }
 }
 
