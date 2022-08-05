@@ -18,7 +18,7 @@ public class Queue<E> extends LinkedList<E> {
   @Override
   public Iterator<E> iterator() {
 
-    class QueueIterator<T> implements Iterator<T> {
+    return new Iterator<E>() {
 
       @Override
       public boolean hasNext() {
@@ -27,12 +27,10 @@ public class Queue<E> extends LinkedList<E> {
 
       @SuppressWarnings("unchecked")
       @Override
-      public T next() {
-        return (T) Queue.this.poll();
+      public E next() {
+        return  Queue.this.poll();
       }
-    }
-
-    return new QueueIterator<E>();
+    };
   }
 
 

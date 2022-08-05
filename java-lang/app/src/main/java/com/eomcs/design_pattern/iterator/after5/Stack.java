@@ -42,7 +42,7 @@ public class Stack<E> {
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
 
-    class StackIterator<T> implements Iterator<T> {
+    return new Iterator<E>() {
 
       @Override
       public boolean hasNext() {
@@ -51,12 +51,10 @@ public class Stack<E> {
 
       @SuppressWarnings("unchecked")
       @Override
-      public T next() {
-        return (T) Stack.this.pop();
+      public E next() {
+        return Stack.this.pop();
       }
-    }
-
-    return new StackIterator<E>();
+    };
   }
 
 
