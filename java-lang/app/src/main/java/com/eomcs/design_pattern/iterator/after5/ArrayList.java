@@ -98,13 +98,14 @@ public class ArrayList<E> {
 
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
-    // local class(로컬 클래스)
-    // => 바깥 클래스의 인스턴스를 사용하면서 특정 메서드 안에서만 사용할 클래스라면
-    //    로컬 클래스로 정의하라 !
-    // => 물론 논스태틱 중첩 클래스처럼 바깥 클래스의 인스턴스 주소를 다루는 필드와
-    //    생성자 파라미터가 자동으로 추가된다.
-    class ArrayListIterator<T> implements Iterator<T> {
 
+    // anonymous class (익명 클래스)
+    // => 인스턴스를 한 개만 생성하는 클래스를 만들 경우 사용하는 문법이다.
+    // => 문법
+    //      인터페이스명 레퍼런스 = new 인터페이스명() {
+    //        인터페이스에 선언된 메서드 구현
+    //      }
+    Iterator<E> iterator = new Iterator<>() {
       int index = 0;
 
 
@@ -115,13 +116,13 @@ public class ArrayList<E> {
 
       @SuppressWarnings("unchecked")
       @Override
-      public T next() {
-        return (T) ArrayList.this.get(index++);
+      public E next() {
+        return ArrayList.this.get(index++);
       }
-    }
-    return new ArrayListIterator<E>();
-  }
+    };
 
+    return iterator;
+  }
 
 }
 

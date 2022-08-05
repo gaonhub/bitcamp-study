@@ -175,7 +175,7 @@ public class LinkedList<E> {
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
 
-    class LinkedListIterator<T> implements Iterator<T> {
+    return new Iterator<E>() {
 
       int index = 0;
 
@@ -186,12 +186,10 @@ public class LinkedList<E> {
 
       @SuppressWarnings("unchecked")
       @Override
-      public T next() {
-        return (T) LinkedList.this.get(index++);
+      public E next() {
+        return LinkedList.this.get(index++);
       }
-    }
-
-    return new LinkedListIterator<E>();
+    };
   }
 
 
