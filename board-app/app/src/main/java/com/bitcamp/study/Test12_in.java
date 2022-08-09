@@ -1,4 +1,4 @@
-// FileInputStream: float, double 값 읽기
+// FileInputStream: boolean 값 읽기
 package com.bitcamp.study;
 
 import java.io.FileInputStream;
@@ -7,7 +7,6 @@ public class Test12_in {
 
   public static void main(String[] args) throws Exception {
     FileInputStream in = new FileInputStream("test6.data");
-
 
     // float 값에 해당하는 바이트 읽기
     int temp = (in.read() << 24) 
