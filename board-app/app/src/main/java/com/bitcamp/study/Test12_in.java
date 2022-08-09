@@ -1,4 +1,4 @@
-// FileInputStream: boolean 값 읽기
+// FileInputStream: float, double 값 읽기
 package com.bitcamp.study;
 
 import java.io.FileInputStream;
@@ -15,21 +15,22 @@ public class Test12_in {
         + in.read();
 
     // int 변수에 저장된 것을 float 변수에 담기
-    float f = Float.floatToIntBits(temp);
+    float f = Float.intBitsToFloat(temp);
     System.out.printf("%f\n", f);
+
 
     // double 값에 해당하는 바이트 읽기
     long temp2 = (((long) in.read()) << 56) 
-        + (((long) in.read()) << 48)
+        + (((long) in.read()) << 48) 
         + (((long) in.read()) << 40)
-        + (((long) in.read()) << 32)
-        + (((long) in.read()) << 24)
-        + (((long) in.read()) << 16)
+        + (((long) in.read()) << 32) 
+        + (((long) in.read()) << 24) 
+        + (((long) in.read()) << 16) 
         + (((long) in.read()) << 8)
         + in.read();
 
     // long 변수에 저장된 것을 double 변수에 담기
-    double d = Double.doubleToLongBits(temp2);
+    double d = Double.longBitsToDouble(temp2);
     System.out.printf("%f\n", d);
 
     in.close();

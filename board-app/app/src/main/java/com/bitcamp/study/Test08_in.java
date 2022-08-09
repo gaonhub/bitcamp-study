@@ -14,7 +14,7 @@ public class Test08_in {
     // 배열 크기만큼 바이트를 읽어서 담기
     // => 파일의 크기 보다 배열이 클 경우 파일 크기만큼만 읽는다.
     int len = in.read(arr, 3, 7);
-    System.out.println("읽은 개수는 : " + len);
+    System.out.println("읽은 개수는: " + len);
 
     for (int i = 0; i < arr.length; i++) {
       System.out.printf("%02x\n", arr[i]);

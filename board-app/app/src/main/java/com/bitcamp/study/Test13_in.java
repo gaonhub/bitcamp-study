@@ -1,4 +1,4 @@
-// FileInputStream: float, double 값 읽기
+// FileInputStream: boolean 값 읽기
 package com.bitcamp.study;
 
 import java.io.FileInputStream;

@@ -1,11 +1,11 @@
-// FileOutputStream: write(byte[], offset, len) 사용법
+// FileOutputStream: write(byte[], offset, len) 사용법 
 package com.bitcamp.study;
 
 import java.io.FileOutputStream;
 
 public class Test04_out {
 
-  public static void main(String[] args) throws Exception{
+  public static void main(String[] args) throws Exception {
     FileOutputStream out = new FileOutputStream("test4.data");
 
     byte[] bytes = new byte[] {100, 90, 80, 70, 60};
@@ -17,4 +17,5 @@ public class Test04_out {
 
     System.out.println("실행 완료!");
   }
+
 }

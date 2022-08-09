@@ -1,11 +1,11 @@
-// FileOutputStream: boolean 값 사용법
+// FileOutputStream: boolean 값 출력
 package com.bitcamp.study;
 
 import java.io.FileOutputStream;
 
 public class Test13_out {
 
-  public static void main(String[] args) throws Exception{
+  public static void main(String[] args) throws Exception {
     FileOutputStream out = new FileOutputStream("test7.data");
 
     boolean b1 = true;
@@ -18,4 +18,5 @@ public class Test13_out {
 
     System.out.println("실행 완료!");
   }
+
 }

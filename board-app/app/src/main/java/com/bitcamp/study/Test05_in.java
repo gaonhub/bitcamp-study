@@ -13,7 +13,7 @@ public class Test05_in {
 
     // 배열 크기만큼 바이트를 읽어서 담기
     int len = in.read(arr);
-    System.out.println("읽은 개수는 : " + len);
+    System.out.println("읽은 개수는: " + len);
 
     for (int i = 0; i < arr.length; i++) {
       System.out.printf("%02x\n", arr[i]);
