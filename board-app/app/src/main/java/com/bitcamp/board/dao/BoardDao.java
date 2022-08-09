@@ -89,6 +89,8 @@ public class BoardDao {
   public void save() throws Exception {
     FileOutputStream out = new FileOutputStream(filename);
 
+    // 첫 번째 출력할 게시글의 개수를 4바이트 int 값으로 먼저 출력한다.
+    // 
     for (Board board : list) {
       // int ==> byte[]
       // 예) board.no = 0x12345678
