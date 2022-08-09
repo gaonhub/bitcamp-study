@@ -1,5 +1,7 @@
 package com.bitcamp.board.dao;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +15,15 @@ public class MemberDao {
   String filename;
 
   public MemberDao(String filename) {
-    this.filename =  filename;
+    this.filename = filename;
+  }
+
+  public void load() throws Exception {
+    FileInputStream in = new FileInputStream(filename);
+  }
+
+  public void save() throws Exception {
+    FileOutputStream out = new FileOutputStream(filename);
   }
 
   public void insert(Member member) {
@@ -47,8 +57,8 @@ public class MemberDao {
 
     int i = 0;
     while (iterator.hasNext()) {
-      arr[i++] = iterator.next();
-    } 
+      arr[i++] = iterator.next(); 
+    }
     return arr;
   }
 }

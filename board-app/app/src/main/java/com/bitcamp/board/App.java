@@ -19,7 +19,6 @@ public class App {
     try {
       welcome();
 
-
       // 핸들러를 담을 레퍼런스 배열을 준비한다.
       Handler[] handlers = new Handler[] {
           new BoardHandler("board.data"), // 게시판
@@ -29,7 +28,6 @@ public class App {
           new BoardHandler("daily.data"), // 일기장
           new MemberHandler("member.data") // 회원
       };
-
 
       // "메인" 메뉴의 이름을 스택에 등록한다.
       breadcrumbMenu.push("메인");
@@ -80,8 +78,8 @@ public class App {
       // 사용자에게 간단한 예외 메시지를 남기고
       // 필요하다면 로그 파일에 오류 기록을 남기고,
       // 실행을 종료한다.
-      System.out.printf("실행 오류 발생! - %s:%s\n",
-          e.getClass().getName(),
+      System.out.printf("실행 오류 발생! - %s:%s\n", 
+          e.getClass().getName(), 
           e.getMessage() != null ? e.getMessage() : "");
     }
 

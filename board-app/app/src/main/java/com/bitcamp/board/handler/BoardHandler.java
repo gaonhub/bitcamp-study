@@ -20,6 +20,7 @@ public class BoardHandler extends AbstractHandler {
     super(new String[] {"목록", "상세보기", "등록", "삭제", "변경"});
 
     boardDao = new BoardDao(filename);
+
     try {
       boardDao.load();
     } catch (Exception e) {
@@ -40,8 +41,8 @@ public class BoardHandler extends AbstractHandler {
         case 4: this.onDelete(); break;
         case 5: this.onUpdate(); break;
       }
-    } catch (Exception e) { 
-      throw new RuntimeException(e); 
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -107,7 +108,7 @@ public class BoardHandler extends AbstractHandler {
     System.out.println("게시글을 등록했습니다.");
   }
 
-  private void onDelete() throws Exception{
+  private void onDelete() throws Exception {
     int boardNo = 0;
     while (true) {
       try {
