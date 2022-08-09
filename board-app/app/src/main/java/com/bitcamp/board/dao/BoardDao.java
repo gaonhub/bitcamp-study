@@ -103,29 +103,29 @@ public class BoardDao {
   public void save() throws Exception {
     FileOutputStream out = new FileOutputStream(filename);
 
-<<<<<<< HEAD
+
     // 첫 번째 출력할 게시글의 개수를 4바이트 int 값으로 먼저 출력한다.
     // 
-=======
+
     // 첫 번째로 먼저 게시글의 개수를 4바이트 int 값으로 출력한다.
     out.write(list.size() >> 24);  
     out.write(list.size() >> 16);
     out.write(list.size() >> 8);
     out.write(list.size());
 
->>>>>>> fb209059aecddf67d553b2983277b4093f93ec97
+
     for (Board board : list) {
       // int ==> byte[] 
       // 예) board.no = 0x12345678
       System.out.println("------------------------");
-      System.out.printf("%08x\n", board.no);
+      //      System.out.printf("%08x\n", board.no);
       out.write(board.no >> 24); // 0x00000012|345678  
       out.write(board.no >> 16); // 0x00001234|5678
       out.write(board.no >> 8);  // 0x00123456|78
       out.write(board.no);       // 0x12345678|
 
       // String(UTF-16) => UTF-8 
-      System.out.printf("%s\n", board.title);
+      //      System.out.printf("%s\n", board.title);
       // 출력할 바이트 배열의 개수를 먼저 출력한다.
       byte[] bytes = board.title.getBytes("UTF-8"); 
       out.write(bytes.length >> 24);
@@ -134,7 +134,7 @@ public class BoardDao {
       out.write(bytes.length);
       out.write(bytes);
 
-      System.out.printf("%s\n", board.content);
+      //      System.out.printf("%s\n", board.content);
       bytes = board.content.getBytes("UTF-8"); 
       out.write(bytes.length >> 24);
       out.write(bytes.length >> 16);
@@ -142,7 +142,7 @@ public class BoardDao {
       out.write(bytes.length);
       out.write(bytes);
 
-      System.out.printf("%s\n", board.writer);
+      //      System.out.printf("%s\n", board.writer);
       bytes = board.writer.getBytes("UTF-8"); 
       out.write(bytes.length >> 24);
       out.write(bytes.length >> 16);
@@ -150,7 +150,7 @@ public class BoardDao {
       out.write(bytes.length);
       out.write(bytes);
 
-      System.out.printf("%s\n", board.password);
+      //      System.out.printf("%s\n", board.password);
       bytes = board.password.getBytes("UTF-8"); 
       out.write(bytes.length >> 24);
       out.write(bytes.length >> 16);
@@ -159,14 +159,14 @@ public class BoardDao {
       out.write(bytes);
 
       // int ==> byte[]
-      System.out.printf("%08x\n", board.viewCount);
+      //      System.out.printf("%08x\n", board.viewCount);
       out.write(board.viewCount >> 24);
       out.write(board.viewCount >> 16);
       out.write(board.viewCount >> 8);
       out.write(board.viewCount);
 
       // long ==> byte[]
-      System.out.printf("%016x\n", board.createdDate);
+      //      System.out.printf("%016x\n", board.createdDate);
       out.write((int)(board.createdDate >> 56));
       out.write((int)(board.createdDate >> 48));
       out.write((int)(board.createdDate >> 40));
