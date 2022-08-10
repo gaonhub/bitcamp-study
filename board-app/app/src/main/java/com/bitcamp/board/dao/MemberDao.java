@@ -1,9 +1,8 @@
 package com.bitcamp.board.dao;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,30 +20,32 @@ public class MemberDao {
   }
 
   public void load() throws Exception {
-    try (DataInputStream in = new DataInputStream(new FileInputStream(filename))) {
-      int size = in.readInt();
-      for (int i = 0; i < size; i++) {
+    try (BufferedReader in = new BufferedReader(new FileReader(filename))) {
+      String str;
+      while ((str = in.readLine()) != null) {
+        String[] values = str.split(",");
+
         Member member = new Member();
-        member.no = in.readInt();
-        member.name = in.readUTF();
-        member.email = in.readUTF();
-        member.password = in.readUTF();
-        member.createdDate = in.readLong();
+        member.no = Integer.parseInt(values[0]);
+        member.name = values[1];
+        member.email = values[2];
+        member.password = values[3];
+        member.createdDate = Long.parseLong(values[4]);
+
         list.add(member);
-        //        System.out.println("============>");
       }
     } // try () ==> try 블록을 벗어나기 전에 in.close()가 자동으로 실행된다.
   }
 
   public void save() throws Exception {
-    try (DataOutputStream out = new DataOutputStream(new FileOutputStream(filename))) {
-      out.writeInt(list.size());
+    try (FileWriter out = new FileWriter(filename)) {
       for (Member member : list) {
-        out.writeInt(member.no);
-        out.writeUTF(member.name);
-        out.writeUTF(member.email);
-        out.writeUTF(member.password);
-        out.writeLong(member.createdDate);
+        out.write(String.format("%d,%s,%s,%s,%d\n", 
+            member.no,
+            member.name,
+            member.email,
+            member.password,
+            member.createdDate));
       }
     } // try () ==> try 블록을 벗어나기 전에 out.close()가 자동으로 실행된다.
   }
