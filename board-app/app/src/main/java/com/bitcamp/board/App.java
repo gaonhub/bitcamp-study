@@ -37,7 +37,6 @@ public class App {
 
       loop: while (true) {
 
-        // 메인 메뉴 출력
         printTitle();
         printMenus(menus);
         System.out.println();

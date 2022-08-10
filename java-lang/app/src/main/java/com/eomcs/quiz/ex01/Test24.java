@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01.sol;
+package com.eomcs.quiz.ex01;
 // copyright by codefights.com
 // 
 // 두 개의 정수 L과 R이 주어질 때 다음 조건을 만족하는 (A,B)의 개수를 구하라!

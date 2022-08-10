@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01.sol;
+package com.eomcs.quiz.ex01;
 // copyright by codefights.com
 // 
 // 문자열에 포함된 숫자의 합을 구하라.

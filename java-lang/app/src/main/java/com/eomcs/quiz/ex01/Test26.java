@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01.sol;
+package com.eomcs.quiz.ex01;
 // copyright by codefights.com
 // 
 // 정수 l과 r 사이의 있는 두 수를 더했을 때 n이 될 수 있는 

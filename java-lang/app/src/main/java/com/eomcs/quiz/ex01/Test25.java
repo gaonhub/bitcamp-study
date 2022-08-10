@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01.sol;
+package com.eomcs.quiz.ex01;
 // copyright by codefights.com
 // 
 // 정수의 자릿수가 주어질 때,
