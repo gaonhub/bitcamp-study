@@ -17,7 +17,12 @@ public class Test04 {
 
   static int countEvenNumber(int value) {
     int result = 0;
-    // 이 메서드를 완성하시오!
+    while (value != 0) {
+      if ((value % 2) == 0) {
+        result++;
+      }
+      value /= 10;
+    }
     return result;
   }
 }

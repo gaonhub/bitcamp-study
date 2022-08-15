@@ -20,7 +20,10 @@ public class Test01 {
 
   static int countBits(int value) {
     int r = 0;
-    // 이 메서드를 완성하시오!
+    while (value != 0) {
+      r += (value & 1);
+      value >>>= 1; 
+    }
     return r;
   }
 
