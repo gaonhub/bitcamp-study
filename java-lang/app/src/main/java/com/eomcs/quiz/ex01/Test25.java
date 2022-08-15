@@ -36,15 +36,7 @@ public class Test25 {
   }
 
   static int smallestNumber(int n) {
-    if (n == 1) {
-      return 0;
-    }
-
-    int res = 1;
-    for (int i = 1; i < n; i++) {
-      res *= 10;
-    }
-
-    return res;
+    // 이 메서드를 완성하시오!
+    return 0;
   }
 }

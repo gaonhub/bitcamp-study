@@ -30,12 +30,7 @@ public class Test09 {
   }
 
   static int[] myReverse(int[] input) {
-    for (int i = 0; i < input.length / 2; i++) {
-      int temp = input[i];
-      input[i] = input[input.length - 1 - i];
-      input[input.length - 1 - i] = temp;
-
-    }
+    // 이 메서드를 완성하시오!
     return input;
   }
 }

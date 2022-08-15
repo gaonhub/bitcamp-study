@@ -32,7 +32,7 @@ for L=1, R=8 output should be 2 - (1,1) and (4,8)
  */
 //
 // [시간 복잡도]
-// - O(L*R) = O(n^2) : n은 정수이다. 
+// - ?
 //
 public class Test24 {
 
@@ -43,13 +43,7 @@ public class Test24 {
 
   static int equationSolutions(int L, int R) {
     int result = 0;
-    for (int a = L; a <= R; a++) {
-      for (int b = L; b <= R; b++) {
-        if (a * a * a == b * b) {
-          result++;
-        }
-      }
-    }
+    // 이 메서드를 완성하시오!
     return result;
   }
 }

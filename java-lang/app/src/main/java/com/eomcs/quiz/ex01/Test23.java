@@ -18,7 +18,7 @@ sumUpNumbers("2 apples, 12 oranges") = 5
  */
 //
 // [시간 복잡도]
-// - O(n) : n은 문자열의 길이 
+// - ? 
 //
 public class Test23 {
 
@@ -27,15 +27,8 @@ public class Test23 {
   }
 
   static int sumUpDigits(String inputString) {
-
     int answer = 0;
-
-    for (int i = 0; i < inputString.length(); i++) {
-      if ('1' <= inputString.charAt(i) && inputString.charAt(i) <= '9') {
-        answer += inputString.charAt(i) - '0';
-      }
-    }
-
+    // 이 메서드를 완성하시오!
     return answer;
   }
 }
