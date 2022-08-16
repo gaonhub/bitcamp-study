@@ -37,13 +37,13 @@ public class BoardServlet implements Servlet {
         case "findByNo":
           out.writeUTF("success");
           break;
-        case "insert":
+        case "insert": 
           out.writeUTF("success");
           break;
-        case "update":
+        case "update": 
           out.writeUTF("success");
           break;
-        case "delete":
+        case "delete": 
           out.writeUTF("success");
           break;
         default:

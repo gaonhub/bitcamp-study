@@ -14,7 +14,7 @@ public class HttpClient {
 
       // HTTP 프로토콜에 따라서 메인 웹 페이지를 요청한다.
       out.println("GET /thisbike HTTP/1.1");
-      out.println("Host: www.stores.auction.co.kr");
+      out.println("Host: stores.auction.co.kr");
       out.println(); // 요청 정보 끝
 
       // 웹서버의 응답을 출력한다.

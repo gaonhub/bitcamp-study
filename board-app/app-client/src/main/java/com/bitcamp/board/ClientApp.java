@@ -75,7 +75,6 @@ public class ClientApp {
 
 
       } // while
-
       Prompt.close();
 
       System.out.println("연결을 끊었음!");

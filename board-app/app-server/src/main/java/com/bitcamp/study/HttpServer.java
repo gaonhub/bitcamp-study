@@ -14,7 +14,7 @@ public class HttpServer {
 
       while (true) {
 
-        try(
+        try (
             Socket socket = ss.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintStream out = new PrintStream(socket.getOutputStream());
@@ -22,7 +22,7 @@ public class HttpServer {
           System.out.println("클라이언트가 연결됨!");
 
           // 클라이언트가 보낸 데이터를 읽는다.
-          System.out.println("---------------------------------");
+          System.out.println("-------------------------------");
           String line;
           while ((line = in.readLine()) != null) {
             if (line.length() == 0) { // 클라이언트가 빈 줄을 보내면, 읽기를 끝낸다.
@@ -30,6 +30,7 @@ public class HttpServer {
             }
             System.out.println(line);
           }
+
           // 클라이언트에게 응답한다.
           out.println("HTTP/1.1 200 OK");
           out.println("Content-Type: text/html;charset=UTF-8");
@@ -42,7 +43,6 @@ public class HttpServer {
           out.println("<h1>안녕하세요!</h1>");
           out.println("</body>");
           out.println("</html>");
-
         } // try
       } // while
     } // try
