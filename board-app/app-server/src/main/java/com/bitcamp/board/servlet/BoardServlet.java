@@ -17,7 +17,7 @@ public class BoardServlet implements Servlet {
   private String filename;
 
   public BoardServlet(String dataName) {
-    filename = dataName + ".jason";
+    filename = dataName + ".json";
     boardDao = new BoardDao(filename);
 
     try {
