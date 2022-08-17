@@ -23,15 +23,7 @@ public class Test03 {
   }
 
   static int swapBits(int value, int i, int j) {
-    int iBit = (value >>> i) & 1;
-    int jBit = (value >>> j) & 1;
-
-    if (iBit != jBit) {
-      int iMask = 1 << i;
-      int jMask = 1 << j;
-      int bitMask = iMask | jMask;
-      value ^= bitMask;
-    }
+    // 이 메서드를 완성하시오!
     return value;
   }
 
