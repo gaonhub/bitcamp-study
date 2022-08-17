@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import com.bitcamp.board.servlet.BoardServlet;
+import com.bitcamp.board.servlet.MemberServlet;
 
 public class ServerApp {
   public static void main(String[] args) {
@@ -44,6 +45,7 @@ public class ServerApp {
         BoardServlet visitServlet = new BoardServlet("visit");
         BoardServlet noticeServlet = new BoardServlet("notice");
         BoardServlet dailyServlet = new BoardServlet("daily");
+        MemberServlet memberServlet = new MemberServlet("member");
 
 
         while (true) {
@@ -60,6 +62,7 @@ public class ServerApp {
             case "visit": visitServlet.service(in, out); break;
             case "notice": noticeServlet.service(in, out); break;
             case "daily": dailyServlet.service(in, out); break;
+            case "member": memberServlet.service(in, out); break;
             default:
               out.writeUTF("fail");
           }
