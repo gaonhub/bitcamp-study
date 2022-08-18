@@ -1,7 +1,7 @@
 package com.eomcs.quiz.ex01;
 // copyright by codefights.com
 // 
-// 양의 정수 값이 주어질 때, 가장 자릿수를 알아내라!
+// 양의 정수 값이 주어질 때, 가장 큰 자릿수를 알아내라!
 //
 // 형식:
 //   maxDigit(정수값)
@@ -32,12 +32,7 @@ public class Test29 {
 
   static int maxDigit(int n) {
     int result = 0;
-    while (n > 0) {
-      if ((n % 10) > result) {
-        result = (n % 10);
-      }
-      n /= 10;
-    }
+    // 이 메서드를 완성하시오.
     return result;
   }
 }

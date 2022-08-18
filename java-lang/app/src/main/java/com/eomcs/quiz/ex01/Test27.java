@@ -36,18 +36,18 @@ public class Test27 {
 
   public static void main(String[] args) {
     System.out.println(evenNumbersBeforeFixed(new int[] {1, 4, 2, 6, 3, 2}, 6) == 2);
+    System.out.println(evenNumbersBeforeFixed(new int[] {1, 4, 2, 6, 3, 2}, 7) == -1);
   }
 
   static int evenNumbersBeforeFixed(int[] sequence, int fixedElement) {
-    int result = 0;
-    for (int i = 0; i < sequence.length; i++) {
-      if (sequence[i] % 2 == 0 && sequence[i] != fixedElement) {
-        result++;
-      }
-      if (sequence[i] == fixedElement) {
-        return result;
-      }
-    }
+    // 이 메서드를 완성하시오!
     return -1;
   }
 }
+
+
+
+
+
+
+

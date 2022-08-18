@@ -39,11 +39,7 @@ public class Test28 {
   }
 
   static int maxDivisor(int left, int right, int divisor) {
-    for (int i = right; i >= left; i--) {
-      if ( i % divisor == 0) {
-        return i;
-      }
-    }
+    // 이 메서드를 완성하시오!
     return -1;
   }
 }
