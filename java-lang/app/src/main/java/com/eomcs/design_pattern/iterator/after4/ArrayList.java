@@ -98,15 +98,14 @@ public class ArrayList<E> {
 
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
+
     // local class(로컬 클래스)
-    // => 바깥 클래스의 인스턴스를 사용하면서 특정 메서드 안에서만 사용할 클래스라면
-    //    로컬 클래스로 정의하라 !
-    // => 물론 논스태틱 중첩 클래스처럼 바깥 클래스의 인스턴스 주소를 다루는 필드와
+    // => 바깥 클래스의 인스턴스를 사용하면서 특정 메서드 안에서만 사용할 클래스라면 
+    //    로컬 클래스로 정의하라!
+    // => 물론 논스태틱 중첩 클래스처럼 바깥 클래스의 인스턴스 주소를 다루는 필드와 
     //    생성자 파라미터가 자동으로 추가된다.
     class ArrayListIterator<T> implements Iterator<T> {
-
       int index = 0;
-
 
       @Override
       public boolean hasNext() {
@@ -119,10 +118,9 @@ public class ArrayList<E> {
         return (T) ArrayList.this.get(index++);
       }
     }
+
     return new ArrayListIterator<E>();
   }
-
-
 }
 
 

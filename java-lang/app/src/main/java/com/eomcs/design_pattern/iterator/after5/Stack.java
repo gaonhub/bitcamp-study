@@ -41,15 +41,12 @@ public class Stack<E> {
 
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
-
     return new Iterator<E>() {
-
       @Override
       public boolean hasNext() {
         return !Stack.this.empty();
       }
 
-      @SuppressWarnings("unchecked")
       @Override
       public E next() {
         return Stack.this.pop();
@@ -58,8 +55,11 @@ public class Stack<E> {
   }
 
 
-
 }
+
+
+
+
 
 
 

@@ -63,11 +63,6 @@ public class Stack<E> {
       return list.pop();
     }
   }
-
 }
-
-
-
-
 
 

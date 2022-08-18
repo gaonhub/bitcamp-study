@@ -177,7 +177,7 @@ public class LinkedList<E> {
     return new LinkedListIterator<E>(this);
   }
 
-  // 스태틱 중첩 클래스로 정의한다.
+  // 스태틱 중첩 클래스로 정의한다. 
   static class LinkedListIterator<E> implements Iterator<E> {
 
     LinkedList<E> list;
@@ -197,8 +197,11 @@ public class LinkedList<E> {
       return list.get(index++);
     }
   }
-
 }
+
+
+
+
 
 
 

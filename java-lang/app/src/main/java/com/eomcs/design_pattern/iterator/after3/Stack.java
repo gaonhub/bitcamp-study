@@ -44,11 +44,11 @@ public class Stack<E> {
     return new StackIterator<E>();
   }
 
-  // 논스태틱 중첩 클래스로 정의하면
+  // 논스태틱 중첩 클래스로 정의하면 
   // 바깥 클래스의 인스턴스 주소를 받는 필드가 자동으로 추가된다.
-  // 또한 바깥 클래스의 인스턴스 주소를 받는 파라미터가 각각의 생성자에 자동으로 추가된다.
+  // 또한 바깥 클래스의 인스턴스 주소를 받는 파라미터가 가각의 생성자에 자동으로 추가된다.
+  // 
   class StackIterator<T> implements Iterator<T> {
-
     @Override
     public boolean hasNext() {
       return !Stack.this.empty();
@@ -60,8 +60,11 @@ public class Stack<E> {
       return (T) Stack.this.pop();
     }
   }
-
 }
+
+
+
+
 
 
 

@@ -41,9 +41,7 @@ public class Stack<E> {
 
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
-
     class StackIterator<T> implements Iterator<T> {
-
       @Override
       public boolean hasNext() {
         return !Stack.this.empty();
@@ -60,8 +58,11 @@ public class Stack<E> {
   }
 
 
-
 }
+
+
+
+
 
 
 

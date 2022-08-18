@@ -17,7 +17,6 @@ public class Queue<E> extends LinkedList<E> {
   // Iterator 구현체를 제공한다.
   @Override
   public Iterator<E> iterator() {
-
     class QueueIterator<T> implements Iterator<T> {
 
       @Override
@@ -37,5 +36,7 @@ public class Queue<E> extends LinkedList<E> {
 
 
 }
+
+
 
 

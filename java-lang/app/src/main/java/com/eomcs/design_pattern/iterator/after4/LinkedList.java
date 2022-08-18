@@ -174,9 +174,7 @@ public class LinkedList<E> {
 
   // Iterator 구현체를 제공한다.
   public Iterator<E> iterator() {
-
     class LinkedListIterator<T> implements Iterator<T> {
-
       int index = 0;
 
       @Override
@@ -195,11 +193,7 @@ public class LinkedList<E> {
   }
 
 
-
 }
-
-
-
 
 
 
