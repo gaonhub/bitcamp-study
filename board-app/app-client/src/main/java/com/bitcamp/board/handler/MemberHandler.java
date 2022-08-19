@@ -6,6 +6,7 @@ package com.bitcamp.board.handler;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.Date;
+import com.bitcamp.board.dao.MemberDaoProxy;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.handler.AbstractHandler;
 import com.bitcamp.util.Prompt;
@@ -13,16 +14,12 @@ import com.google.gson.Gson;
 
 public class MemberHandler extends AbstractHandler {
 
-  private String dataName;
-  private DataInputStream in;
-  private DataOutputStream out;
+  MemberDaoProxy memberDao;
 
   public MemberHandler(String dataName, DataInputStream in, DataOutputStream out) {
     super(new String[] {"목록", "상세보기", "등록", "삭제", "변경"});
 
-    this.dataName = dataName;
-    this.in = in;
-    this.out = out;
+    memberDao = new MemberDaoProxy(dataName, in, out);
   }
 
   @Override
