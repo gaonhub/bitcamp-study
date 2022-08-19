@@ -18,7 +18,7 @@ public class ServerApp {
       System.out.println("서버 소켓 준비 완료!");
 
       // 클라이언트 요청을 처리할 객체 준비
-      Hashtable<String, Servlet> servletMap = new Hashtable<>();
+      Hashtable<String,Servlet> servletMap = new Hashtable<>();
       servletMap.put("board", new BoardServlet("board"));
       servletMap.put("reading", new BoardServlet("reading"));
       servletMap.put("visit", new BoardServlet("visit"));
@@ -43,7 +43,7 @@ public class ServerApp {
 
             Servlet servlet = servletMap.get(dataName);
             if (servlet != null) {
-              servlet.service(in,out);
+              servlet.service(in, out);
             } else {
               out.writeUTF("fail");
             }

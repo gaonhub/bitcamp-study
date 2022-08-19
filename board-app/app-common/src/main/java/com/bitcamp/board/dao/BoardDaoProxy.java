@@ -60,7 +60,6 @@ public class BoardDaoProxy {
     }
     return new Gson().fromJson(in.readUTF(), Board[].class);
   }
-
 }
 
 

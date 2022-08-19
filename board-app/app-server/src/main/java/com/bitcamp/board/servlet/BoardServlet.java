@@ -24,7 +24,7 @@ public class BoardServlet implements Servlet {
       boardDao.load();
     } catch (Exception e) {
       System.out.printf("%s 파일 로딩 중 오류 발생!\n", filename);
-      //      e.printStackTrace();
+      e.printStackTrace();
     }
   }
 
@@ -60,7 +60,7 @@ public class BoardServlet implements Servlet {
           boardDao.save();
           out.writeUTF(SUCCESS);
           break;
-        case "update":
+        case "update": 
           json = in.readUTF();
           board = new Gson().fromJson(json, Board.class);
           if (boardDao.update(board)) {

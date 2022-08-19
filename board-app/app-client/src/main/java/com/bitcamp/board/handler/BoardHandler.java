@@ -14,7 +14,7 @@ import com.bitcamp.util.Prompt;
 
 public class BoardHandler extends AbstractHandler {
 
-  BoardDaoProxy boardDao;
+  private BoardDaoProxy boardDao;
 
   public BoardHandler(String dataName, DataInputStream in, DataOutputStream out) {
 
@@ -55,10 +55,9 @@ public class BoardHandler extends AbstractHandler {
       System.out.printf("%d\t%s\t%d\t%s\t%s\n",
           board.no, board.title, board.viewCount, board.writer, dateStr);
     }
-
   }
 
-  private void onDetail() throws Exception{
+  private void onDetail() throws Exception {
     int boardNo = 0;
     while (true) {
       try {
@@ -83,7 +82,6 @@ public class BoardHandler extends AbstractHandler {
     System.out.printf("작성자: %s\n", board.writer);
     Date date = new Date(board.createdDate);
     System.out.printf("등록일: %tY-%1$tm-%1$td %1$tH:%1$tM\n", date);
-
   }
 
   private void onInput() throws Exception {
@@ -101,7 +99,6 @@ public class BoardHandler extends AbstractHandler {
     } else {
       System.out.println("게시글 등록에 실패했습니다!");
     }
-
   }
 
   private void onDelete() throws Exception {
@@ -120,7 +117,6 @@ public class BoardHandler extends AbstractHandler {
     } else {
       System.out.println("해당 번호의 게시글이 없습니다!");
     }
-
   }
 
   private void onUpdate() throws Exception {
@@ -137,7 +133,7 @@ public class BoardHandler extends AbstractHandler {
     Board board = boardDao.findByNo(boardNo);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다!");
-      return;        
+      return;
     }
 
     board.title = Prompt.inputString("제목?(" + board.title + ") ");
@@ -155,7 +151,6 @@ public class BoardHandler extends AbstractHandler {
     } else {
       System.out.println("변경 취소했습니다.");
     }
-
   }
 }
 
