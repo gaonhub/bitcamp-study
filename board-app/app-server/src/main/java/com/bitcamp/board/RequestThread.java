@@ -12,7 +12,7 @@ import com.bitcamp.servlet.Servlet;
 public class RequestThread extends Thread {
 
   private Socket socket;
-  private Map<String, Servlet> servletMap;
+  private Map<String, Servlet> servletMap;  
 
   public RequestThread(Socket socket, Map<String,Servlet> servletMap) {
     this.socket = socket;
