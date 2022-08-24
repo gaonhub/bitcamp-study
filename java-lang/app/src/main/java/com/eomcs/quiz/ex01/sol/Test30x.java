@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 마을에 n개의 집이 있다.
@@ -33,9 +33,9 @@ number of houses, positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n): n은 방문할 집의 수이다.
 //
-public class Test30 {
+public class Test30x {
 
   public static void main(String[] args) {
     System.out.println(visitsOnCircularRoad(4, new int[] {1, 3, 2, 3, 1}) == 6);
@@ -43,7 +43,15 @@ public class Test30 {
   }
 
   static int visitsOnCircularRoad(int N, int[] visitsOrder) {
-    // 이 메서드를 완성하시오!
-    return 0;
+    int currentPosition = 1;
+    int minutes = 0;
+
+    for (int i = 0; i < visitsOrder.length; i++) {
+      int m1 = Math.abs(visitsOrder[i] - currentPosition); // 목적지까지 가는데 걸리는 시간
+      int m2 = N - m1; // 반대 방향으로 갈 때 걸리는 시간?
+      minutes += Math.min(m1, m2); // 두 시간 중에서 짧은 시간?
+      currentPosition = visitsOrder[i]; // 이동후 현재 위치 변경
+    }
+    return minutes;
   }
 }

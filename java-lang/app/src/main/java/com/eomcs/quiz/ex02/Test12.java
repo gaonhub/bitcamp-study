@@ -39,12 +39,7 @@ public class Test12 {
   }
 
   static int[] swapArrayHalves(int[] inputArray) {
-    int half = inputArray.length / 2;
-    for (int i = 0; i < half; i++) {
-      int temp = inputArray[i];
-      inputArray[i] = inputArray[i + half];
-      inputArray[i + half] = temp;
-    }
+    // 이 메서드를 완성하시오!
     return inputArray;
   }
 }
