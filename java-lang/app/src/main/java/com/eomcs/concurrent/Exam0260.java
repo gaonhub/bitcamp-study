@@ -1,21 +1,29 @@
 package com.eomcs.concurrent;
 
-public class Exam0170 {
+public class Exam0260 {
 
   public static void main(String[] args) {
 
     int count = 1000;
 
-    Thread t = new Thread() {
+    Runnable r = new Runnable() {
       @Override
       public void run() {
+
         for (int i = 0; i < count; i++) {
           System.out.println("==> " + i);
         }
       }
     };
 
-    t.start();
+    //    MyRunnable r = new MyRunnable(count);
+    //    Thread t = new Thread(r);
+    //    t.start();
+
+    //    Thread t = new Thread(new MyRunnable(count));
+    //    t.start();
+
+    new Thread(r).start();
 
     for (int i = 0; i < count; i++) {
       System.out.println(">>> " + i);
@@ -23,8 +31,5 @@ public class Exam0170 {
   }
 
 }
-
-
-
 
 

@@ -1,18 +1,22 @@
 package com.eomcs.concurrent;
 
-public class Exam0130 {
+public class Exam0280 {
 
   public static void main(String[] args) {
 
     int count = 1000;
 
-    new MyThread(count).start();
+    new Thread(() -> {
+      for (int i = 0; i < count; i++) {
+        System.out.println("==> " + i);
+      }
+    }).start();
 
     for (int i = 0; i < count; i++) {
       System.out.println(">>> " + i);
     }
   }
-}
 
+}
 
 
