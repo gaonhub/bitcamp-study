@@ -1,3 +1,4 @@
+// 1) 스레드 사용 전
 package com.eomcs.concurrent;
 
 public class Exam0210 {
@@ -15,6 +16,3 @@ public class Exam0210 {
     }
   }
 }
-
-
-

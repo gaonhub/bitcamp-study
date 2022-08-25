@@ -4,9 +4,10 @@ public class MyThread extends Thread {
 
   int count;
 
-  public MyThread(int count) { 
+  public MyThread(int count) {
     this.count = count;
   }
+
   @Override
   public void run() {
     for (int i = 0; i < count; i++) {

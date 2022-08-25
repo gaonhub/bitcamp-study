@@ -1,3 +1,5 @@
+// 1) 스레드 사용 전
+// 2) 스레드 사용 후 : Runnable 구현체를 패키지 멤버로 만들어 Thread로 실행한다.
 package com.eomcs.concurrent;
 
 public class Exam0220 {
@@ -20,5 +22,3 @@ public class Exam0220 {
     }
   }
 }
-
-

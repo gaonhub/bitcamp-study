@@ -1,3 +1,7 @@
+// 1) 스레드 사용 전
+// 2) 스레드 사용 후 : Runnable 구현체를 패키지 멤버로 만들어 Thread로 실행한다.
+// 3) 패키지 멤버를 스태틱 중첩 클래스로 만든다.
+// 4) 스태틱 중첩 클래스를 로컬 클래스로 만든다.
 package com.eomcs.concurrent;
 
 public class Exam0240 {
@@ -14,7 +18,6 @@ public class Exam0240 {
 
       @Override
       public void run() {
-
         for (int i = 0; i < count; i++) {
           System.out.println("==> " + i);
         }
@@ -22,13 +25,6 @@ public class Exam0240 {
     }
 
     int count = 1000;
-
-    //    MyRunnable r = new MyRunnable(count);
-    //    Thread t = new Thread(r);
-    //    t.start();
-
-    //    Thread t = new Thread(new MyRunnable(count));
-    //    t.start();
 
     new Thread(new MyRunnable(count)).start();
 
@@ -38,5 +34,3 @@ public class Exam0240 {
   }
 
 }
-
-
