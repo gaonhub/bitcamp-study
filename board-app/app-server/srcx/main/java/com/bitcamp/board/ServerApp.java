@@ -10,7 +10,6 @@ import com.bitcamp.board.servlet.MemberServlet;
 import com.bitcamp.servlet.Servlet;
 
 public class ServerApp {
-
   public static void main(String[] args) {
 
     // 클라이언트 요청을 처리할 객체 준비
@@ -30,7 +29,7 @@ public class ServerApp {
 
       while (true) {
         // 람다 문법에서는 인스턴스 필드는 처리할 수 없다.
-        // 따라서 다시 로컬 변수로 전환한다.
+        // 따라서 로컬 변수로 전환한다.
         Socket socket = serverSocket.accept();
 
         new Thread(() -> {
@@ -40,8 +39,11 @@ public class ServerApp {
 
             System.out.println("클라이언트와 연결 되었음!");
 
+            // 클라이언트와 서버 사이에 정해진 규칙(protocol)에 따라 데이터를 주고 받는다.
             String dataName = in.readUTF();
 
+            // 로컬 클래스는 바깥 메서드의 로컬 변수를 자신의 멤버인 것처럼 사용할 수 있다.
+            // 어떻게? 컴파일러가 그것이 가능하도록 필드와 생성자에 파라미터를 자동으로 추가한다.
             Servlet servlet = servletMap.get(dataName);
             if (servlet != null) {
               servlet.service(in, out);
@@ -55,7 +57,8 @@ public class ServerApp {
             System.out.println("클라이언트 요청 처리 중 오류 발생!");
             e.printStackTrace();
           }
-        }).start();
+        }
+            ).start();
       }
     } catch (Exception e) {
       e.printStackTrace();
