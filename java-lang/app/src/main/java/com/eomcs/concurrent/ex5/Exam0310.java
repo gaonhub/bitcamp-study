@@ -22,7 +22,7 @@ public class Exam0310 {
     System.out.printf("---------- [%s] 출력 끝\n", threadName);
   }
 
-  // 동기 실행
+  // 동기 실행  
   // - 한 번에 한 스레드만 진입 가능!
   synchronized static void print2(String threadName, Counter counter) {
     System.out.printf("[%s] 출력 시작 ----------\n", threadName);
