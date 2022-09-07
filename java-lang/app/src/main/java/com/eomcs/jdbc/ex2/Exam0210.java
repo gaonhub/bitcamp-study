@@ -1,4 +1,5 @@
 // 게시판 관리 - JDBC 코드를 별도의 클래스로 캡슐화시킴. DAO 적용.
+// insert 사용
 // 1) Board 객체를 만든다.
 // 2) 사용자에게 입력받을 Scanner를 준비한다.
 // 3) 이 클래스에서 try블럭 두 개를 사용한다.
@@ -16,28 +17,29 @@ public class Exam0210 {
   public static void main(String[] args) throws Exception {
     Board board = new Board();
 
-    try(Scanner keyscan = new Scanner(System.in)) {
+    try(Scanner keyScan = new Scanner(System.in)) {
       System.out.print("제목?");
-      board.setTitle(keyscan.nextLine());
+      board.setTitle(keyScan.nextLine());
 
       System.out.print("내용?");
-      board.setContent(keyscan.nextLine());
+      board.setContent(keyScan.nextLine());
 
       System.out.print("입력하시겠습니까?(y/n)");
-      String input = keyscan.nextLine();
+      String input = keyScan.nextLine();
 
-      if(!input.equalsIgnoreCase("y") && input.length() != 0) {
+      if (!input.equalsIgnoreCase("y") && input.length() != 0) {
         System.out.println("등록을 취소하였습니다.");
         return;
-      }
-    }
+      } 
 
-    try {
-      BoardDao boardDao = new BoardDao();
-      int count = boardDao.insert(board);
-      System.out.printf("%s개 입력 성공!", count);
-    } catch (Exception e) {
-      e.printStackTrace();
+      try {
+        BoardDao boardDao = new BoardDao();
+        int count = boardDao.insert(board);
+        System.out.printf("%d 개 입력 완료", count);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
     }
   }
 }

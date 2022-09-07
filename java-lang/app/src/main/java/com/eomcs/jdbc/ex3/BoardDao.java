@@ -13,76 +13,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
-  public int delete(int no) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "delete from x_board where board_id=?")) {
+  public final String URL = "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111";
 
-      stmt.setInt(1, no);
-      return stmt.executeUpdate();
+  public int delete(int no) throws Exception {
+    try (Connection con = DriverManager.getConnection(URL);
+        PreparedStatement pstmt = con.prepareStatement("delete from x_board where board_id=?")) {
+      pstmt.setInt(1, no);
+      return pstmt.executeUpdate();
     }
   }
 
   public List<Board> findAll() throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "select * from x_board order by board_id desc");
-        ResultSet rs = stmt.executeQuery()) {
+    try (Connection con = DriverManager.getConnection(URL);
+        PreparedStatement pstmt = con.prepareStatement("select * from x_board order by board_id desc");
+        ResultSet rs = pstmt.executeQuery()) {
 
-      ArrayList<Board> arr = new ArrayList<>();
+      ArrayList<Board> list = new ArrayList<>();
       while (rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));
-        board.setContent(rs.getString("contents"));
+        board.setContent(rs.getString("content"));
         board.setRegisteredDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
-        arr.add(board);
+        list.add(board);
       }
-      return arr;
+      return list;
     }
   }
 
   public int insert(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt =
-            con.prepareStatement("insert into x_board(title,contents) values(?,?)");) {
+    try (Connection con = DriverManager.getConnection(URL);
+        PreparedStatement pstmt = con.prepareStatement("insert into x_board(title,contents) value(?,?)")) {
 
-      stmt.setString(1, board.getTitle());
-      stmt.setString(2, board.getContent());
+      pstmt.setString(1, board.getTitle());
+      pstmt.setString(2, board.getContent());
 
-      return stmt.executeUpdate();
+      return pstmt.executeUpdate();
     }
   }
 
   public int update(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "update x_board set title = ?, contents = ? where board_id = ?")) {
+    try (Connection con = DriverManager.getConnection(URL);
+        PreparedStatement pstmt = con.prepareStatement("update x_board set title=?, contents=? where board_id=?")) {
 
-      stmt.setString(1, board.getTitle());
-      stmt.setString(2, board.getContent());
-      stmt.setInt(3, board.getNo());
+      pstmt.setString(1, board.getTitle());
+      pstmt.setString(2, board.getContent());
+      pstmt.setInt(3, board.getNo());
 
-      return stmt.executeUpdate();
+      return pstmt.executeUpdate();
     }
   }
 
   public Board findBy(String no) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "select * from x_board where board_id = ?")) {
+    try (Connection con = DriverManager.getConnection(URL);
+        PreparedStatement pstmt = con.prepareStatement("select * from x_board where board_id=?")) {
 
-      stmt.setString(1, no);
+      pstmt.setString(1, no);
 
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (!rs.next())
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (!rs.next()) {
           return null;
+        }
 
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
@@ -91,8 +83,10 @@ public class BoardDao {
         board.setRegisteredDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
         return board;
+
       }
     }
+
   }
 }
 
