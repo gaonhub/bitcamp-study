@@ -1,10 +1,10 @@
--- app_board
+-- 게시글
 DROP TABLE IF EXISTS app_board RESTRICT;
 
 -- 회원
 DROP TABLE IF EXISTS app_member RESTRICT;
 
--- app_board
+-- 게시글
 CREATE TABLE app_board (
   bno    INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   title  VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
@@ -14,11 +14,11 @@ CREATE TABLE app_board (
   cdt    DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
   vw_cnt INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
-COMMENT 'app_board';
+COMMENT '게시글';
 
--- app_board
+-- 게시글
 ALTER TABLE app_board
-  ADD CONSTRAINT PK_app_board -- app_board 기본키
+  ADD CONSTRAINT PK_app_board -- 게시글 기본키
     PRIMARY KEY (
       bno -- 게시글번호
     );
@@ -45,22 +45,22 @@ ALTER TABLE app_member
 
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX UIX_app_member
-  ON  app_member ( -- 회원
+  ON app_member ( -- 회원
     email ASC -- 이메일
   );
 
 -- 회원 인덱스
 CREATE INDEX IX_app_member
-  ON  app_member( -- 회원
+  ON app_member( -- 회원
     name ASC -- 이름
   );
 
 ALTER TABLE app_member
   MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
--- app_board
+-- 게시글
 ALTER TABLE app_board
-  ADD CONSTRAINT FK_app_member_TO_app_board -- 회원 -> app_board
+  ADD CONSTRAINT FK_app_member_TO_app_board -- 회원 -> 게시글
     FOREIGN KEY (
       mno -- 회원번호
     )
