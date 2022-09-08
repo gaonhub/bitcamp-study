@@ -18,6 +18,7 @@ public class BoardDao {
   public int delete(int no) throws Exception {
     try (Connection con = DriverManager.getConnection(URL);
         PreparedStatement pstmt = con.prepareStatement("delete from x_board where board_id=?")) {
+
       pstmt.setInt(1, no);
       return pstmt.executeUpdate();
     }
@@ -29,11 +30,11 @@ public class BoardDao {
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Board> list = new ArrayList<>();
-      while (rs.next()) {
+      if (rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));
-        board.setContent(rs.getString("content"));
+        board.setContent(rs.getString("contents"));
         board.setRegisteredDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
         list.add(board);
@@ -48,19 +49,17 @@ public class BoardDao {
 
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
-
       return pstmt.executeUpdate();
     }
   }
 
   public int update(Board board) throws Exception {
     try (Connection con = DriverManager.getConnection(URL);
-        PreparedStatement pstmt = con.prepareStatement("update x_board set title=?, contents=? where board_id=?")) {
+        PreparedStatement pstmt = con.prepareStatement("upadte x_board set title=?,contents=? where board_id=?")) {
 
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
       pstmt.setInt(3, board.getNo());
-
       return pstmt.executeUpdate();
     }
   }
@@ -75,7 +74,6 @@ public class BoardDao {
         if (!rs.next()) {
           return null;
         }
-
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));
@@ -83,7 +81,6 @@ public class BoardDao {
         board.setRegisteredDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
         return board;
-
       }
     }
 

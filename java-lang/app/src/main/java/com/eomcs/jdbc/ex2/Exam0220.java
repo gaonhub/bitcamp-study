@@ -15,7 +15,7 @@ public class Exam0220 {
       BoardDao boardDao = new BoardDao();
       List<Board> list = boardDao.findAll();
       for (Board b : list) {
-        System.out.printf("%d, %s, %s, %s, %d",
+        System.out.printf("%d, %s, %s, %s, %d", 
             b.getNo(),
             b.getTitle(),
             b.getContent(),
