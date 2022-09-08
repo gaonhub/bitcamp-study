@@ -73,7 +73,7 @@ public class MariaDBMemberDao implements MemberDao {
         PreparedStatement pstmt2 = con.prepareStatement("delete from app_member2 where mno=?")) {
 
       // 커넥션 객체를 수동 커밋 상태로 설정한다.
-      con.setAutoCommit(false);
+      con.setAutoCommit (false);
 
       // 회원이 작성한 게시글을 삭제한다.
       pstmt1.setInt(1, no);
