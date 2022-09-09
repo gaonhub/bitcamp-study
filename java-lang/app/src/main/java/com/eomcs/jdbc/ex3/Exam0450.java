@@ -10,7 +10,6 @@ public class Exam0450 {
 
   public static void main(String[] args) throws Exception {
     int no = 0;
-
     try (Scanner keyScan = new Scanner(System.in)) {
       System.out.print("번호?");
       no = Integer.parseInt(keyScan.nextLine());
@@ -21,7 +20,7 @@ public class Exam0450 {
       int count = boardDao.delete(no);
 
       if (count == 0) {
-        System.out.println("해당 게시글의 번호가 존재하지 않습니다");
+        System.out.println("해당 번호의 게시글이 존재하지 않습니다");
       } else {
         System.out.println("삭제하였습니다");
       }

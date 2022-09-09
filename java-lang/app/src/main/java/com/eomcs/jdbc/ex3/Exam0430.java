@@ -15,6 +15,7 @@ public class Exam0430 {
       System.out.print("번호?");
       no = keyScan.nextLine();
     }
+
     try {
       BoardDao boardDao = new BoardDao();
       Board board = boardDao.findBy(no);
@@ -22,10 +23,10 @@ public class Exam0430 {
       if (board != null) {
         System.out.printf("제목: %s\n", board.getTitle());
         System.out.printf("내용: %s\n", board.getContent());
-        System.out.printf("등록일: %s\n", board.getRegisteredDate());
-        System.out.printf("조회수: %d\n", board.getViewCount());
+        System.out.printf("조회수: %s\n", board.getViewCount());
+        System.out.printf("등록일: %d\\n", board.getRegisteredDate());
       } else {
-        System.out.println("해당 번호의 게시글이 존재하지않습니다");
+        System.out.println("해당 번호의 게시글이 존재하지 않습니다");
       }
     } catch (Exception e) {
       e.printStackTrace();

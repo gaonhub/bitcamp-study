@@ -15,11 +15,13 @@ public class Exam0440 {
     Board board = new Board();
 
     try (Scanner keyScan = new Scanner(System.in)) {
-      System.out.print("번호?");
+      System.out.print("번호");
       board.setNo(Integer.parseInt(keyScan.nextLine()));
-      System.out.print("제목?");
+
+      System.out.print("제목");
       board.setTitle(keyScan.nextLine());
-      System.out.print("내용?");
+
+      System.out.print("내용");
       board.setContent(keyScan.nextLine());
     }
 
