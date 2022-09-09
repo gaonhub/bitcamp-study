@@ -30,7 +30,7 @@ public class BoardDao {
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Board> list = new ArrayList<>();
-      if (rs.next()) {
+      while (rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));

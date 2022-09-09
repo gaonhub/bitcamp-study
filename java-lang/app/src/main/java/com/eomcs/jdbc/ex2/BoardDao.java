@@ -13,27 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
+  private final String URL = "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111";
+
   public int delete(int no) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+    try (Connection con = DriverManager.getConnection(URL);
         Statement stmt = con.createStatement()) {
 
-      // 첨부파일 삭제
-      stmt.executeUpdate("delete from x_board_file where board_id = " + no);
-
-      // 게시글 삭제
+      stmt.executeUpdate("delete from x_board where board_id=" + no);
       return stmt.executeUpdate("delete from x_board where board_id=" + no);
     }
   }
 
   public List<Board> findAll() throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+    try (Connection con = DriverManager.getConnection(URL);
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from x_board order by board_id desc")) {
 
       ArrayList<Board> list = new ArrayList<>();
-      while (rs.next()) {
+      while(rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));
@@ -47,26 +44,21 @@ public class BoardDao {
   }
 
   public int insert(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        Statement stmt = con.createStatement();) {
+    try (Connection con = DriverManager.getConnection(URL);
+        Statement stmt = con.createStatement()) {
 
-      String sql = String.format(
-          "insert into x_board(title,contents) values('%s','%s')", 
+      String sql = String.format("insert into x_board(title,contents) value('%s','%s')",
           board.getTitle(),
           board.getContent());
-
       return stmt.executeUpdate(sql);
     }
   }
 
   public int update(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+    try (Connection con = DriverManager.getConnection(URL);
         Statement stmt = con.createStatement()) {
 
-      String sql = String.format(
-          "update x_board set title='%s', contents='%s' where board_id=%d", 
+      String sql = String.format("update x_board set title='%s',contents='%s' where board_id=%d",
           board.getTitle(),
           board.getContent(),
           board.getNo());
@@ -76,10 +68,9 @@ public class BoardDao {
   }
 
   public Board findBy(String no) throws Exception {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+    try (Connection con = DriverManager.getConnection(URL);
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from x_board where board_id = " + no)) {
+        ResultSet rs = stmt.executeQuery("select * from x_board where board_id= " + no)) {
 
       if (rs.next()) {
         Board board = new Board();
