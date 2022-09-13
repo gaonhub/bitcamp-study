@@ -1,70 +1,105 @@
 package com.bitcamp.board;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Hashtable;
-import com.bitcamp.board.servlet.BoardServlet;
-import com.bitcamp.board.servlet.MemberServlet;
-import com.bitcamp.servlet.Servlet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.Stack;
+import com.bitcamp.board.dao.MariaDBBoardDao;
+import com.bitcamp.board.dao.MariaDBMemberDao;
+import com.bitcamp.board.handler.BoardHandler;
+import com.bitcamp.board.handler.MemberHandler;
+import com.bitcamp.handler.Handler;
+import com.bitcamp.util.Prompt;
 
 public class ServerApp {
 
+  // breadcrumb 메뉴를 저장할 스택을 준비
+  public static Stack<String> breadcrumbMenu = new Stack<>();
+
   public static void main(String[] args) {
+    try (// DAO 가 사용할 커넥션 객체 준비
+        Connection con = DriverManager.getConnection(
+            "jdbc:mariadb://localhost:3306/studydb","study","1111");
+        ) {
+      System.out.println("[게시글 관리 클라이언트]");
 
-    // 클라이언트 요청을 처리할 객체 준비
-    Hashtable<String,Servlet> servletMap = new Hashtable<>();
-    servletMap.put("board", new BoardServlet("board"));
-    servletMap.put("reading", new BoardServlet("reading"));
-    servletMap.put("visit", new BoardServlet("visit"));
-    servletMap.put("notice", new BoardServlet("notice"));
-    servletMap.put("daily", new BoardServlet("daily"));
-    servletMap.put("member", new MemberServlet("member"));
+      welcome();
 
-    System.out.println("[게시글 데이터 관리 서버]");
+      // DAO 객체를 준비한다.
+      MariaDBMemberDao memberDao = new MariaDBMemberDao(con);
+      MariaDBBoardDao boardDao = new MariaDBBoardDao(con);
 
-    try (ServerSocket serverSocket = new ServerSocket(8888);) {
+      // 핸들러를 담을 컬렉션을 준비한다.
+      ArrayList<Handler> handlers = new ArrayList<>();
+      handlers.add(new BoardHandler(boardDao));
+      handlers.add(new MemberHandler(memberDao));
 
-      System.out.println("서버 소켓 준비 완료!");
+      // "메인" 메뉴의 이름을 스택에 등록한다.
+      breadcrumbMenu.push("메인");
 
-      while (true) {
-        // 람다 문법에서는 인스턴스 필드는 처리할 수 없다.
-        // 따라서 다시 로컬 변수로 전환한다.
-        Socket socket = serverSocket.accept();
+      // 메뉴명을 저장할 배열을 준비한다.
+      String[] menus = {"게시판", "회원"};
 
-        new Thread(() -> {
-          try (Socket socket2 = socket;
-              DataInputStream in = new DataInputStream(socket.getInputStream());
-              DataOutputStream out = new DataOutputStream(socket.getOutputStream());) {
+      loop: while (true) {
 
-            System.out.println("클라이언트와 연결 되었음!");
+        printTitle();
+        printMenus(menus);
+        System.out.println();
 
-            String dataName = in.readUTF();
+        try {
+          int mainMenuNo = Prompt.inputInt(String.format(
+              "메뉴를 선택하세요[1..%d](0: 종료) ", handlers.size()));
 
-            Servlet servlet = servletMap.get(dataName);
-            if (servlet != null) {
-              servlet.service(in, out);
-            } else {
-              out.writeUTF("fail");
-            }
+          if (mainMenuNo < 0 || mainMenuNo > menus.length) {
+            System.out.println("메뉴 번호가 옳지 않습니다!");
+            continue; // while 문의 조건 검사로 보낸다.
 
-            System.out.println("클라이언트와 연결을 끊었음!");
-
-          } catch (Exception e) {
-            System.out.println("클라이언트 요청 처리 중 오류 발생!");
-            e.printStackTrace();
+          } else if (mainMenuNo == 0) {
+            break loop;
           }
-        }).start();
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } // 바깥 쪽 try 
 
-    System.out.println("서버 종료!");
+          // 메뉴에 진입할 때 breadcrumb 메뉴바에 그 메뉴를 등록한다.
+          breadcrumbMenu.push(menus[mainMenuNo - 1]);
+
+          // 메뉴 번호로 Handler 레퍼런스에 들어있는 객체를 찾아 실행한다.
+          handlers.get(mainMenuNo - 1).execute();
+
+          breadcrumbMenu.pop();
+
+        } catch (Exception ex) {
+          System.out.println("입력 값이 옳지 않습니다.");
+        }
+
+
+      } // while
+      Prompt.close();
+
+      System.out.println("종료!");
+
+    } catch (Exception e) {
+      System.out.println("시스템 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
+  static void welcome() throws Exception {
+    //out.writeUTF("[게시판 애플리케이션]\n\n" + "환영합니다\n\n");
+  }
 
+  static void printMenus(String[] menus) {
+    for (int i = 0; i < menus.length; i++) {
+      System.out.printf("  %d: %s\n", i + 1, menus[i]);
+    }
+  }
 
-
+  protected static void printTitle() {
+    StringBuilder builder = new StringBuilder();
+    for (String title : breadcrumbMenu) {
+      if (!builder.isEmpty()) {
+        builder.append(" > ");
+      }
+      builder.append(title);
+    }
+    System.out.printf("%s:\n", builder.toString());
+  }
 }
