@@ -49,31 +49,30 @@ public class BoardDao {
 
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
+
       return pstmt.executeUpdate();
     }
   }
 
   public int update(Board board) throws Exception {
     try (Connection con = DriverManager.getConnection(URL);
-        PreparedStatement pstmt = con.prepareStatement("upadte x_board set title=?,contents=? where board_id=?")) {
+        PreparedStatement pstmt = con.prepareStatement("update x_board set title=?,contents=? where board_id=?")) {
 
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
-      pstmt.setInt(3, board.getNo());
+
       return pstmt.executeUpdate();
     }
   }
 
   public Board findBy(String no) throws Exception {
     try (Connection con = DriverManager.getConnection(URL);
-        PreparedStatement pstmt = con.prepareStatement("select * from x_board where board_id=?")) {
+        PreparedStatement pstmt = con.prepareStatement("select * from x_board where board_id=?");
+        ResultSet rs = pstmt.executeQuery()) {
 
       pstmt.setString(1, no);
 
-      try (ResultSet rs = pstmt.executeQuery()) {
-        if (!rs.next()) {
-          return null;
-        }
+      if (rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("title"));
@@ -81,9 +80,10 @@ public class BoardDao {
         board.setRegisteredDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
         return board;
+      } else {
+        return null;
       }
     }
-
   }
 }
 

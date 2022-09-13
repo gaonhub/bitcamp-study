@@ -15,31 +15,33 @@ import java.util.Scanner;
 public class Exam0210 {
 
   public static void main(String[] args) throws Exception {
+
     Board board = new Board();
 
-    try(Scanner keyScan = new Scanner(System.in)) {
+    try (Scanner keyScan = new Scanner(System.in)) {
+
       System.out.print("제목?");
       board.setTitle(keyScan.nextLine());
 
       System.out.print("내용?");
       board.setContent(keyScan.nextLine());
 
-      System.out.print("입력하시겠습니까?(y/n)");
+      System.out.print("입력하시겠습니까? (y/n)");
       String input = keyScan.nextLine();
 
       if (!input.equalsIgnoreCase("y") && input.length() != 0) {
-        System.out.println("등록을 취소하였습니다.");
+        System.out.println("등록을 취소 하였습니다.");
         return;
       } 
+    }
 
-      try {
-        BoardDao boardDao = new BoardDao();
-        int count = boardDao.insert(board);
-        System.out.printf("%d 개 입력 완료", count);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    try {
+      BoardDao boardDao = new BoardDao();
+      int count = boardDao.insert(board);
+      System.out.printf("%d개 입력 성공! ", count);
 
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }

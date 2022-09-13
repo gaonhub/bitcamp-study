@@ -17,8 +17,10 @@ public class Exam0240 {
     try (Scanner keyScan = new Scanner(System.in)) {
       System.out.print("번호?");
       board.setNo(Integer.parseInt(keyScan.nextLine()));
+
       System.out.print("제목?");
       board.setTitle(keyScan.nextLine());
+
       System.out.print("내용?");
       board.setContent(keyScan.nextLine());
     }
@@ -26,11 +28,12 @@ public class Exam0240 {
     try {
       BoardDao boardDao = new BoardDao();
       int count = boardDao.update(board);
+
       if (count == 0) {
-        System.out.println("해당 번호의 게시글이 존재하지 않습니다.");
+        System.out.println("해당 번호의 게시글이 존재하지 않습니다");
       } else {
-        System.out.println("변경완료");
-      } 
+        System.out.println("변경되었습니다");
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }

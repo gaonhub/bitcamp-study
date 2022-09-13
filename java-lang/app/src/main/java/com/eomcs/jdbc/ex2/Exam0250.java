@@ -21,12 +21,12 @@ public class Exam0250 {
       BoardDao boardDao = new BoardDao();
       int count = boardDao.delete(no);
 
-      if (count == 0) {
-        System.out.println("해당 게시글의 번호가 없습니다.");
+      if (count == 0) { 
+        System.out.println("해당 번호의 게시글이 존재하지 않습니다");
       } else {
-        System.out.println("삭제하였습니다.");
+        System.out.println("삭제되었습니다");
       }
-    } catch (Exception e) {
+    } catch (Exception e) { 
       e.printStackTrace();
     }
   }
