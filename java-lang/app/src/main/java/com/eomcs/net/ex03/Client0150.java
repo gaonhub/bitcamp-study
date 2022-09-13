@@ -1,4 +1,10 @@
 // 서버와 입출력 테스트 - byte stream: 문자열 주고 받기
+// 사용자로부터 입력받을 scanner 준비
+// socket 생성
+// 서버와 데이터를 주고받을 스트림 생성
+// 서버에게 문자열을 보내기 전 blocking
+// 서버에게 데이터를 보낸 후 서버로부터 데이터를 받는다.
+
 package com.eomcs.net.ex03;
 
 import java.io.PrintStream;
@@ -6,6 +12,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client0150 {
+
   public static void main(String[] args) {
 
     try (Scanner keyScan = new Scanner(System.in);

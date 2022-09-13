@@ -1,4 +1,12 @@
-// 클라이언트와 입출력 테스트 - byte stream: 문자열 주고 받기 
+// 클라이언트와 입출력 테스트 - byte stream: 문자열 주고 받기
+// 사용자로부터 입력받을 scanner 준비
+// serversocket 생성
+// 클라이언트와 소켓 연결
+// 클라이언트와 데이터를 주고받을 스트림 생성
+// 클라이언트로부터 문자열을 받은 후 출력
+// 클라이언트에게 데이터를 보내기전 blocking
+// 클라이언트에게 데이터 전송
+
 package com.eomcs.net.ex03;
 
 import java.io.PrintStream;
@@ -41,6 +49,5 @@ public class Server0150 {
     }
     System.out.println("서버 종료!");
   }
-
 }
 
