@@ -46,16 +46,22 @@ public abstract class AbstractHandler implements Handler {
     // 현재 스레드를 위해 보관된 Breadcrumb 객체를 꺼낸다.
     BreadCrumb breadcrumb = BreadCrumb.getBreadCrumbOfCurrentThread();
 
-    // 핸들러의 메뉴를 클아이언트에게 보낸다.
-    try (StringWriter strOut = new StringWriter();
-        PrintWriter tempOut = new PrintWriter(strOut)) {
-
-      tempOut.println(breadcrumb.toString());
-      printMenus(tempOut);
-      out.writeUTF(strOut.toString());
-    }
+    String message = null;
 
     while (true) {
+      // 핸들러의 메뉴를 클라이언트에게 보낸다.
+      try (StringWriter strOut = new StringWriter();
+          PrintWriter tempOut = new PrintWriter(strOut)) {
+
+        if (message != null) { 
+          tempOut.println(message);
+          message = null;
+        }
+        tempOut.println();
+        tempOut.println(breadcrumb.toString());
+        printMenus(tempOut);
+        out.writeUTF(strOut.toString());
+      }
 
       // 클라이언트가 보낸 요청을 읽는다.
       String request = in.readUTF();
@@ -63,24 +69,25 @@ public abstract class AbstractHandler implements Handler {
         break;
       }
 
+      // 클라이언트가 선택한 메뉴를 처리한다.
+      int menuNo = Integer.parseInt(request);
+
       try (StringWriter strOut = new StringWriter();
           PrintWriter tempOut = new PrintWriter(strOut)) {
 
-        tempOut.println("해당 메뉴를 준비 중입니다.");
+        if (menuNo < 0 || menuNo > menus.length) {
+          System.out.println("메뉴 번호가 옳지 않습니다!");
+          continue; 
+        }
 
-        printBlankLine(tempOut);
-        tempOut.println(breadcrumb.toString());
-        printMenus(tempOut);
-        out.writeUTF(strOut.toString());
+        message = "해당 메뉴를 준비 중입니다.";
+
       }
-
       /*
       try {
 
 
-        if (menuNo < 0 || menuNo > menus.length) {
-          System.out.println("메뉴 번호가 옳지 않습니다!");
-          continue; // while 문의 조건 검사로 보낸다.
+
 
         } else if (menuNo == 0) {
           return; // 메인 메뉴로 돌아간다.
@@ -106,8 +113,7 @@ public abstract class AbstractHandler implements Handler {
         ex.printStackTrace();
       }
        */
-    } // while
-
+    }  // while
   }
 
   // 서브 클래스가 반드시 만들어야 할 메서드

@@ -25,7 +25,9 @@ import com.bitcamp.util.BreadCrumb;
 //    - AbstractHandler 추상 클래스의 execute() 변경
 // 10) Breadcrumb 기능을 객체로 분리한다.
 //    - Breadcrumb 클래스를 정의한다.
-//
+// 11) 클라이언트에게 응답 메시지를 보내는 기능을 별도의 객체로 분리하여 캡슐화한다.
+//    - Response 클래스 정의
+// 12) "menu" 요청이 들어 왔을 때 클라이언트에게 메뉴를 제공한다.
 public class ServerApp {
 
 
@@ -55,6 +57,12 @@ public class ServerApp {
             // 접속한 클라이언트의 이동 경로를 보관할 breadcrumb 객체 준비
             BreadCrumb breadcrumb = new BreadCrumb(); // 현재 스레드 보관소에 저장된다.
             breadcrumb.put("메인");
+
+            try (StringWriter strOut = new StringWriter();
+                PrintWriter tempOut = new PrintWriter(strOut);) {
+              welcome(tempOut);
+              out.writeUTF(strOut.toString());
+            }
 
             boolean first = true;
             String errorMessage = null;
