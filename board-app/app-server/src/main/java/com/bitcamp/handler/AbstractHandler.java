@@ -26,7 +26,7 @@ public abstract class AbstractHandler implements Handler {
   // 접근 범위를 protected로 설정한다.
   protected void printMenus(DataOutputStream out) throws Exception {
     try (StringWriter strOut = new StringWriter();
-        PrintWriter tempOut = new PrintWriter(strOut);) {
+        PrintWriter tempOut = new PrintWriter(strOut)) {
 
       tempOut.println(BreadCrumb.getBreadCrumbOfCurrentThread().toString());
 
@@ -50,7 +50,7 @@ public abstract class AbstractHandler implements Handler {
 
   static void error(DataOutputStream out, Exception e) {
     try (StringWriter strOut = new StringWriter();
-        PrintWriter tempOut = new PrintWriter(strOut);) {
+        PrintWriter tempOut = new PrintWriter(strOut)) {
       tempOut.printf("실행 오류:%s\n", e.getMessage());
       out.writeUTF(strOut.toString());
     } catch (Exception e2) {
@@ -86,14 +86,16 @@ public abstract class AbstractHandler implements Handler {
         // 사용자가 입력한 메뉴 번호에 대해 작업을 수행한다.
         service(menuNo, in, out);
 
-        // 메뉴에 나올 때 breadcrumb 메뉴바에 그 메뉴를 제거한다.
-        BreadCrumb.getBreadCrumbOfCurrentThread().pickUp();
-
       } catch (Exception e) {
-        error(out,e);
+        error(out, e);
+
+      } finally {
+        // 성공하든 실패하든
+        // 메뉴에서 나올 때 breadcrumb 메뉴바에 그 메뉴를 제거한다.
+        BreadCrumb.getBreadCrumbOfCurrentThread().pickUp();
       }
 
-    }  // while
+    } // while
   }
 
   // 서브 클래스가 반드시 만들어야 할 메서드

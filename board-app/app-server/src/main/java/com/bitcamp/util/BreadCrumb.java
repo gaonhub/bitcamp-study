@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class BreadCrumb {
 
-  public static Stack<String> menuStack = new Stack<>();
+  public Stack<String> menuStack = new Stack<>();
 
   // Thread 마다 BreadCrumb 객체를 따로 관리해주는 관리자를 준비한다.
   static ThreadLocal<BreadCrumb> localManager = new ThreadLocal<>();
@@ -16,7 +16,7 @@ public class BreadCrumb {
   }
 
   public BreadCrumb() {
-    // 스레드 로컬 관리자에게 현재 스레드 전용 보관소에
+    // 스레드 로컬 관리자에게 현재 스레드 전용 보관소에 
     // Breadcrumb 객체를 보관해 달라고 요청한다.
     localManager.set(this);
   }
