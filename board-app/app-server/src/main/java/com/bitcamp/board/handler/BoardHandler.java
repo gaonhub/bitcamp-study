@@ -93,16 +93,22 @@ public class BoardHandler extends AbstractHandler {
 
   private void onInput(DataInputStream in, DataOutputStream out) throws Exception {
 
-    Prompt prompt = new Prompt(in, out);
+    try (StringWriter strOut = new StringWriter();
+        PrintWriter tempOut = new PrintWriter(strOut);) {
 
-    Board board = new Board();
+      Prompt prompt = new Prompt(in, out);
 
-    board.title = prompt.inputString("제목? ");
-    board.content = prompt.inputString("내용? ");
-    board.memberNo = prompt.inputString("작성자? ");
+      Board board = new Board();
 
-    boardDao.insert(board);
-    System.out.println("게시글을 등록했습니다.");
+      board.title = prompt.inputString("제목? ");
+      board.content = prompt.inputString("내용? ");
+      board.memberNo = prompt.inputInt("작성자? ");
+
+      boardDao.insert(board);
+      out.writeUTF("게시글을 등록했습니다.");
+
+      out.writeUTF(strOut.toString());
+    }
   }
 
   private void onDelete(DataInputStream in, DataOutputStream out) throws Exception {
