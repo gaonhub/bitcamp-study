@@ -15,9 +15,9 @@ import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.dao.MariaDBBoardDao;
 import com.bitcamp.board.dao.MariaDBMemberDao;
 import com.bitcamp.board.dao.MemberDao;
-import com.bitcamp.board.handler.BoardHandler;
+import com.bitcamp.board.handler.BoardAddHandler;
 import com.bitcamp.board.handler.ErrorHandler;
-import com.bitcamp.board.handler.MemberHandler;
+import com.bitcamp.board.handler.MemberAddHandler;
 import com.bitcamp.board.handler.WelcomeHandler;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -44,8 +44,8 @@ public class MiniWebServer {
 
     WelcomeHandler welcomeHandler = new WelcomeHandler();
     ErrorHandler errorHandler = new ErrorHandler();
-    BoardHandler boardHandler = new BoardHandler(boardDao);
-    MemberHandler memberHandler = new MemberHandler(memberDao);
+    BoardAddHandler boardHandler = new BoardAddHandler(boardDao);
+    MemberAddHandler memberHandler = new MemberAddHandler(memberDao);
 
     class MyHttpHandler implements HttpHandler {
       @Override
