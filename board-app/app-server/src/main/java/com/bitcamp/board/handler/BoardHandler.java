@@ -26,14 +26,14 @@ public class BoardHandler {
     out.println("<title>bitcamp</title>");
     out.println("<style>");
     out.println("tr:hover {");
-    out.println("   background-color: navy;");
-    out.println("   color: white;");
+    out.println("  background-color: navy;");
+    out.println("  color: white;");
     out.println("}");
     out.println("</style>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글</h1>");
-    out.println("<a href='form'>새 글 </a>");
+    out.println("<a href='form'>새 글</a>");
     out.println("<table border='1'>");
     out.println("  <tr>");
     out.println("    <th>번호</th>");
@@ -53,7 +53,9 @@ public class BoardHandler {
       out.printf("  <td>%s</td>", board.createdDate);
       out.println("</tr>");
     }
+
     out.println("</table>");
+    out.println("<p><a href='/'>메인</a></p>");
     out.println("</body>");
     out.println("</html>");
   }
@@ -115,7 +117,7 @@ public class BoardHandler {
     out.println("<head>");
     out.println("<meta charset=\"UTF-8\">");
     out.println("<title>bitcamp</title>");
-    out.println("<meta http-equiv='Refresh' content='3; url=list'>");
+    out.println("<meta http-equiv='Refresh' content='1; url=list'>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글 삭제</h1>");
@@ -131,6 +133,7 @@ public class BoardHandler {
 
     out.println("</body>");
     out.println("</html>");
+
   }
 
   public void update(Map<String,String> paramMap, PrintWriter out) throws Exception {
@@ -140,7 +143,7 @@ public class BoardHandler {
     out.println("<head>");
     out.println("<meta charset=\"UTF-8\">");
     out.println("<title>bitcamp</title>");
-    out.println("<meta http-equiv='Refresh' content='3; url=list'>");
+    out.println("<meta http-equiv='Refresh' content='1; url=list'>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글 변경</h1>");
@@ -192,6 +195,7 @@ public class BoardHandler {
 
     out.println("</body>");
     out.println("</html>");
+
   }
 
   public void add(Map<String,String> paramMap, PrintWriter out) throws Exception {
@@ -201,7 +205,7 @@ public class BoardHandler {
     out.println("<head>");
     out.println("<meta charset=\"UTF-8\">");
     out.println("<title>bitcamp</title>");
-    out.println("<meta http-equiv='Refresh' content='3; url=list'>");
+    out.println("<meta http-equiv='Refresh' content='1; url=list'>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글 입력</h1>");
@@ -212,7 +216,7 @@ public class BoardHandler {
     board.memberNo = Integer.parseInt(paramMap.get("writerNo"));
 
     if (boardDao.insert(board) == 0) {
-      out.println("<p>게시글을 등록할 수 없습니다.</p>");
+      out.println("<p>게시글을 등록할 수 없습니다!</p>");
 
     } else {
       out.println("<p>게시글을 등록했습니다.</p>");
@@ -220,8 +224,8 @@ public class BoardHandler {
 
     out.println("</body>");
     out.println("</html>");
-  }
 
+  }
 
 
 }
