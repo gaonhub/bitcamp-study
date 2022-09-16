@@ -16,9 +16,20 @@ import com.bitcamp.board.dao.MariaDBBoardDao;
 import com.bitcamp.board.dao.MariaDBMemberDao;
 import com.bitcamp.board.dao.MemberDao;
 import com.bitcamp.board.handler.BoardAddHandler;
+import com.bitcamp.board.handler.BoardDeleteHandler;
+import com.bitcamp.board.handler.BoardDetailHandler;
+import com.bitcamp.board.handler.BoardFormHandler;
+import com.bitcamp.board.handler.BoardListHandler;
+import com.bitcamp.board.handler.BoardUpdateHandler;
 import com.bitcamp.board.handler.ErrorHandler;
 import com.bitcamp.board.handler.MemberAddHandler;
+import com.bitcamp.board.handler.MemberDeleteHandler;
+import com.bitcamp.board.handler.MemberDetailHandler;
+import com.bitcamp.board.handler.MemberFormHandler;
+import com.bitcamp.board.handler.MemberListHandler;
+import com.bitcamp.board.handler.MemberUpdateHandler;
 import com.bitcamp.board.handler.WelcomeHandler;
+import com.bitcamp.servlet.Servlet;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -42,10 +53,23 @@ public class MiniWebServer {
     BoardDao boardDao = new MariaDBBoardDao(con);
     MemberDao memberDao = new MariaDBMemberDao(con);
 
-    WelcomeHandler welcomeHandler = new WelcomeHandler();
+    // 서블릿 객체를 보관할 맵을 준비
+    Map<String,Servlet> servletMap = new HashMap<>();
+    servletMap.put("/", new WelcomeHandler());
+    servletMap.put("/board/form", new BoardFormHandler());
+    servletMap.put("/board/add", new BoardAddHandler(boardDao));
+    servletMap.put("/board/list", new BoardListHandler(boardDao));
+    servletMap.put("/board/detail", new BoardDetailHandler(boardDao));
+    servletMap.put("/board/update", new BoardUpdateHandler(boardDao));
+    servletMap.put("/board/delete", new BoardDeleteHandler(boardDao)); 
+    servletMap.put("/member/form", new MemberFormHandler());
+    servletMap.put("/member/add", new MemberAddHandler(memberDao));
+    servletMap.put("/member/list", new MemberListHandler(memberDao));
+    servletMap.put("/member/detail", new MemberDetailHandler(memberDao));
+    servletMap.put("/member/update", new MemberUpdateHandler(memberDao));
+    servletMap.put("/member/delete", new MemberDeleteHandler(memberDao));
+
     ErrorHandler errorHandler = new ErrorHandler();
-    BoardAddHandler boardHandler = new BoardAddHandler(boardDao);
-    MemberAddHandler memberHandler = new MemberAddHandler(memberDao);
 
     class MyHttpHandler implements HttpHandler {
       @Override
@@ -72,47 +96,12 @@ public class MiniWebServer {
           }
           System.out.println(paramMap);
 
-          if (path.equals("/")) {
-            welcomeHandler.service(paramMap, printWriter);
+          Servlet servlet = servletMap.get(path);
 
-          } else if (path.equals("/board/list")) {
-            boardHandler.list(paramMap, printWriter);
-
-          } else if (path.equals("/board/detail")) {
-            boardHandler.detail(paramMap, printWriter);
-
-          } else if (path.equals("/board/update")) {
-            boardHandler.update(paramMap, printWriter);
-
-          } else if (path.equals("/board/delete")) {
-            boardHandler.delete(paramMap, printWriter);
-
-          } else if (path.equals("/board/form")) {
-            boardHandler.form(paramMap, printWriter);
-
-          } else if (path.equals("/board/add")) {
-            boardHandler.add(paramMap, printWriter);
-
-          } else if (path.equals("/member/list")) {
-            memberHandler.list(paramMap, printWriter);
-
-          } else if (path.equals("/member/detail")) {
-            memberHandler.detail(paramMap, printWriter);
-
-          } else if (path.equals("/member/update")) {
-            memberHandler.update(paramMap, printWriter);
-
-          } else if (path.equals("/member/delete")) {
-            memberHandler.delete(paramMap, printWriter);
-
-          } else if (path.equals("/member/form")) {
-            memberHandler.form(paramMap, printWriter);
-
-          } else if (path.equals("/member/add")) {
-            memberHandler.add(paramMap, printWriter);
-
+          if (servlet != null) {
+            servlet.service(paramMap, printWriter);
           } else {
-            errorHandler.error(paramMap, printWriter);
+            errorHandler.service(paramMap, printWriter);
           }
 
           bytes = stringWriter.toString().getBytes("UTF-8");
