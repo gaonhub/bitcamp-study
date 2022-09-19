@@ -23,10 +23,10 @@ public class CalculatorHandler implements Servlet {
     String op = paramMap.get("op");
 
     switch (op) {
-      case "+": out.print(a + b); break;
-      case "-": out.print(a - b); break;
-      case "*": out.print(a * b); break;
-      case "/": out.print(a / b); break;
+      case "+": out.println(a + b); break;
+      case "-": out.println(a - b); break;
+      case "*": out.println(a * b); break;
+      case "/": out.println(a / b); break;
       default: out.println("해당 연산자를 지원하지 않습니다.");
     }
 

@@ -19,7 +19,7 @@ import com.bitcamp.servlet.annotation.WebServlet;
 
 public class ApplicationContainer {
 
-  //객체(DAO, 서브릿)를 보관할 맵을 준비
+  //객체(DAO, 서블릿)를 보관할 맵을 준비
   Map<String,Object> objMap = new HashMap<>();
   Reflections reflections;
   ErrorHandler errorHandler = new ErrorHandler();
@@ -46,12 +46,12 @@ public class ApplicationContainer {
       Constructor<?> constructor = servlet.getConstructors()[0];
       Parameter[] params = constructor.getParameters();
 
-      if (params.length == 0) {
+      if (params.length == 0) { 
         objMap.put(servletPath, constructor.newInstance());
 
       } else {
         Object argument = findObject(objMap, params[0].getType());
-        if (argument != null) {
+        if (argument != null) {  
           objMap.put(servletPath, constructor.newInstance(argument));
         }
       }
@@ -59,12 +59,11 @@ public class ApplicationContainer {
   }
 
   public void execute(String path, String query, PrintWriter out) throws Exception {
-
     // query string을 분석하여 파라미터 값을 맵에 저장한다.
     Map<String,String> paramMap = new HashMap<>();
     if (query != null && query.length() > 0) { 
       String[] entries = query.split("&");
-      for (String entry : entries) {
+      for (String entry : entries) { 
         String[] kv = entry.split("=");
         paramMap.put(kv[0], URLDecoder.decode(kv[1], "UTF-8"));
       }
@@ -83,12 +82,20 @@ public class ApplicationContainer {
 
   private static Object findObject(Map<String, Object> objMap, Class<?> type) {
     Collection<Object> values = objMap.values();
-    for (Object value : values) { 
-      if (type.isInstance(value)) { 
-        return value; 
+    for (Object value : values) {
+      if (type.isInstance(value)) {
+        return value;
       }
     }
     return null;
   }
 
 }
+
+
+
+
+
+
+
+

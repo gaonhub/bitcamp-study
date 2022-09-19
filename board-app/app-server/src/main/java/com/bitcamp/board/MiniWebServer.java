@@ -25,14 +25,14 @@ public class MiniWebServer {
 
         URI requestUri = exchange.getRequestURI();
         String path = requestUri.getPath();
-        String query = requestUri.getRawQuery();
+        String query = requestUri.getRawQuery(); 
         byte[] bytes = null;
 
         try (StringWriter stringWriter = new StringWriter();
             PrintWriter printWriter = new PrintWriter(stringWriter)) {
 
-          // 애플리케이션을 찾아 실행하는 것을 ApplicationContainer에게 위임한다.
-          appContainer.execute(path,query,printWriter);
+          // 애플리케이션을 찾아 실행하는 것을 ApplicationContainer 에게 위임한다.
+          appContainer.execute(path, query, printWriter);
 
           bytes = stringWriter.toString().getBytes("UTF-8");
 
@@ -61,3 +61,11 @@ public class MiniWebServer {
     System.out.println("서버 시작!");
   }
 }
+
+
+
+
+
+
+
+

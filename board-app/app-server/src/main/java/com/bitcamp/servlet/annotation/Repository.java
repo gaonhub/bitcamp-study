@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Target(value=ElementType.TYPE) 
-@Retention(value=RetentionPolicy.RUNTIME) 
+@Retention(value=RetentionPolicy.RUNTIME)
 // 다음 애노테이션은 DAO 객체를 표시할 때 사용한다.
 public @interface Repository {
   String value();
