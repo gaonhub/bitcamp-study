@@ -1,14 +1,12 @@
-package com.bitcamp.board.handler;
+package com.bitcamp.board.servlet;
 
 import java.io.PrintWriter;
 import java.util.Map;
-import com.bitcamp.servlet.Servlet;
-import com.bitcamp.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 
-@WebServlet(value="/hello")
-public class HelloHandler implements Servlet {
+public class ErrorServlet extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  @Override
   public void service(Map<String,String> paramMap, PrintWriter out) {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -17,7 +15,8 @@ public class HelloHandler implements Servlet {
     out.println("<title>bitcamp</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>하하하.. 다음 주에...</h1>");
+    out.println("<h1>요청 오류!</h1>");
+    out.println("<p>요청한 자원을 찾을 수 없습니다.</p>");
     out.println("</body>");
     out.println("</html>");
   }

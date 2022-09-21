@@ -87,7 +87,7 @@ public class BoardListServlet extends HttpServlet {
     } catch (Exception e) {
       out.println("<p>실행 중 오류 발생!</p>");
     }
-    out.println("<p><a href='/'>메인</a></p>");
+    out.println("<p><a href='/app/welcome'>메인</a></p>");
     out.println("</body>");
     out.println("</html>");
   }
