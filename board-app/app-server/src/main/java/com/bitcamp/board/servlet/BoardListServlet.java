@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.domain.Board;
 
 
@@ -15,6 +16,13 @@ import com.bitcamp.board.domain.Board;
 public class BoardListServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+
+  BoardDao boardDao;
+
+  @Override
+  public void init() throws ServletException {
+    boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+  }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -40,7 +48,7 @@ public class BoardListServlet extends HttpServlet {
     out.println("<a href='form'>새 글</a>");
 
     try {
-      List<Board> boards = AppInitServlet.boardDao.findAll();
+      List<Board> boards = boardDao.findAll();
 
       out.println("<table border='1'>");
       out.println("  <tr>");
