@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.domain.Board;
 
-@WebServlet("/board/detail")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/board/update")
+public class BoardUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   BoardDao boardDao;
@@ -24,17 +24,20 @@ public class BoardDetailController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int boardNo = Integer.parseInt(request.getParameter("no"));
+      Board board = new Board();
+      board.no = Integer.parseInt(request.getParameter("no"));
+      board.title = request.getParameter("title");
+      board.content = request.getParameter("content");
 
-      Board board = boardDao.findByNo(boardNo);
-
-      if (board == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+      if (boardDao.update(board) == 0) {
+        throw new Exception("게시글 등록 실패!");
       }
-      request.setAttribute("boards", board);
 
+      // Refresh:
+      response.setHeader("Refresh", "1;url=list"); // 응답 헤더에 refresh를 삽입할 수 있다
       response.setContentType("text/html;charset=UTF-8"); 
-      request.getRequestDispatcher("/board/detail.jsp").include(request, response);
+      request.getRequestDispatcher("/board/update.jsp").include(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
