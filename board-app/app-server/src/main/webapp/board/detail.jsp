@@ -8,7 +8,7 @@
 <title>bitcamp</title>
 </head>
 <body>
-<h1>게시글 상세 정보-JSP</h1>
+<h1>게시글 상세 정보(JSP+Servlet)</h1>
 <% 
 Board board = (Board) request.getAttribute("board");
 %>
