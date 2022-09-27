@@ -11,7 +11,7 @@
 <form action='update'>
 <table border='1'>
   <tr>
-    <th>번호</th><td><input name='no' type='number' value='${board.no}' readonly></td>
+    <th>번호</th><td><input name='no' type='number' value='${requestScope.board.no}' readonly></td>
   </tr>
   <tr>
     <th>제목</th><td><input name='title' type='text' value='${board.title}' size='60'></td>
