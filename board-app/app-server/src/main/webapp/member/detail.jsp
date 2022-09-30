@@ -9,13 +9,10 @@
 </head>
 <body>
 <h1>회원 상세 정보(JSP + Servlet + EL)</h1>
-<% 
-Member member = (Member) request.getAttribute("member");
-%>
 <form action='update' method="post">
 <table border='1'>
   <tr>
-    <th>번호</th><td><input name='no' type='number' value='${requestScope.member.no}' readonly></td>
+    <th>번호</th><td><input name='no' type='number' value='${member.no}' readonly></td>
   </tr>
   <tr>
     <th>이름</th><td><input name='name' type='text' value='${member.name}' size='60'></td>

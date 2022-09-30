@@ -3,8 +3,10 @@ package com.bitcamp.board.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import com.bitcamp.board.domain.AttachedFile;
 import com.bitcamp.board.domain.Board;
 import com.bitcamp.board.domain.Member;
 
@@ -19,12 +21,35 @@ public class MariaDBBoardDao implements BoardDao {
 
   @Override
   public int insert(Board board) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "insert into app_board(title,cont,mno) values(?,?,?)")) {
+    try (
+        PreparedStatement pstmt = con.prepareStatement(
+            "insert into app_board(title,cont,mno) values(?,?,?)",
+            Statement.RETURN_GENERATED_KEYS);
+
+        PreparedStatement pstmt2 = con.prepareStatement(
+            "insert into app_board_file(filepath,bno) values(?,?)")) {
+
+      // 게시글 제목과 내용을 app_board 테이블에 저장한다.
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
       pstmt.setInt(3, board.getWriter().getNo());
-      return pstmt.executeUpdate();
+      int count = pstmt.executeUpdate();
+
+      // 게시글을 app_board 테이블에 입력 한 후 자동 증가된 PK 값을 꺼낸다.
+      try (ResultSet rs = pstmt.getGeneratedKeys()) {
+        rs.next();
+        board.setNo(rs.getInt(1));
+      }
+
+      // 게시글의 첨부파일을 app_board_file 테이블에 저장한다.
+      List<AttachedFile> attachedFiles = board.getAttachedFiles();
+      for (AttachedFile attachedFile : attachedFiles) {
+        pstmt2.setString(1, attachedFile.getFilepath());
+        pstmt2.setInt(2, board.getNo());
+        pstmt2.executeUpdate();
+      }
+
+      return count;
     }
   }
 
@@ -32,15 +57,15 @@ public class MariaDBBoardDao implements BoardDao {
   public Board findByNo(int no) throws Exception {
     try (PreparedStatement pstmt = con.prepareStatement(
         "select "
-            + "     b.bno,"
-            + "     b.title,"
-            + "     b.cont,"
-            + "     b.cdt,"
-            + "     b.vw_cnt,"
-            + "     m.mno,"
-            + "     m.name"
+            + "   b.bno,"
+            + "   b.title,"
+            + "   b.cont,"
+            + "   b.cdt,"
+            + "   b.vw_cnt,"
+            + "   m.mno,"
+            + "   m.name"
             + " from app_board b"
-            + "     join app_member m on b.mno = m.mno"
+            + "   join app_member m on b.mno = m.mno"
             + " where b.bno=" + no);
         ResultSet rs = pstmt.executeQuery()) {
 
@@ -91,14 +116,14 @@ public class MariaDBBoardDao implements BoardDao {
   public List<Board> findAll() throws Exception {
     try (PreparedStatement pstmt = con.prepareStatement(
         "select "
-            + "     b.bno,"
-            + "     b.title,"
-            + "     b.cdt,"
-            + "     b.vw_cnt,"
-            + "     m.mno,"
-            + "     m.name"
+            + "   b.bno,"
+            + "   b.title,"
+            + "   b.cdt,"
+            + "   b.vw_cnt,"
+            + "   m.mno,"
+            + "   m.name"
             + " from app_board b"
-            + "     join app_member m on b.mno = m.mno"
+            + "   join app_member m on b.mno = m.mno"
             + " order by bno desc");
         ResultSet rs = pstmt.executeQuery()) {
 

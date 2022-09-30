@@ -122,7 +122,7 @@ public class MariaDBMemberDao implements MemberDao {
   @Override
   public Member findByEmailPassword(String email, String password) throws Exception {
     try (PreparedStatement pstmt = con.prepareStatement(
-        "select mno,name,email,cdt from app_member where email= ? and pwd=sha2(?,256)")) {
+        "select mno,name,email,cdt from app_member where email=? and pwd=sha2(?,256)")) {
 
       pstmt.setString(1, email);
       pstmt.setString(2, password);
@@ -138,7 +138,7 @@ public class MariaDBMemberDao implements MemberDao {
         member.setEmail(rs.getString("email"));
         member.setCreatedDate(rs.getDate("cdt"));
         return member;
-      } 
+      }
     }
   }
 }

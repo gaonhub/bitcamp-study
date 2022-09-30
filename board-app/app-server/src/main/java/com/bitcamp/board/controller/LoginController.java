@@ -32,8 +32,8 @@ public class LoginController extends HttpServlet {
       Member member = memberDao.findByEmailPassword(email, password);
 
       if (member != null) {
-        HttpSession session = request.getSession(); //  요청한 클라이언트의 전용 HttpSession 보관소를 얻는다.
-        session.setAttribute("loginMember", member); // 로그인한 멤버정보를 세션 보관소에 저장
+        HttpSession session = request.getSession(); // 요청한 클라이언트의 전용 HttpSession 보관소를 얻는다.
+        session.setAttribute("loginMember", member); // 로그인한 멤버 정보를 세션 보관소에 저장
       }
 
       // 클라이언트에게 쿠키 보내기

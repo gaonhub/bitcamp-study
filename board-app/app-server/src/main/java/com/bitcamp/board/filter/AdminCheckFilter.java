@@ -30,7 +30,7 @@ public class AdminCheckFilter implements Filter {
 
     Member loginMember = (Member) httpRequest.getSession().getAttribute("loginMember");
     if (loginMember == null || // 로그인이 안됐거나 
-        !loginMember.getEmail().equals("admin@test.com")) { // 관리자가 아니라면 
+        !loginMember.getEmail().equals("admin@test.com")) { // 관리자가 아니라면
       httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
       return;
     }
@@ -39,6 +39,7 @@ public class AdminCheckFilter implements Filter {
   }
 
 }
+
 
 
 
