@@ -1,7 +1,9 @@
 package com.bitcamp.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,9 +51,35 @@ public class BoardAddController extends HttpServlet {
       // - 물론 업로드 된 파일의 데이터는 DiskFileItemFactory에서 관리하고 있다.
       List<FileItem> items = upload.parseRequest(request);
 
-
-
+      // 클라이언트가 멀티파트로 보낸 데이터를 저장할 도메인 객체를 준비한다.
       Board board = new Board();
+
+      // 각 파트의 데이터를 꺼내 Board 객체에 담는다.
+      for (FileItem item : items) {
+        if (item.isFormField()) { // 일반 입력 값이라면 
+          String paramName = item.getFieldName(); // 
+          String paramValue = item.getString("UTF-8");
+
+          switch (paramName) {
+            case "title": board.setTitle(paramValue);
+            case "content": board.setContent(paramValue);
+          }
+
+        } else { // 파일이라면
+          // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 임의의 새 파일명을 생성한다.
+          String filename = UUID.randomUUID().toString();
+
+          // 임시 폴더에 저장된 파일을 옮길 폴더 경로 알아내기
+          String dirPath = this.getServletContext().getRealPath("/board/files");     
+
+          // FileItem 객체가 가리키는 임시 폴더에 저장된 파일을 
+          // 우리가 지정한 디렉토리로 옮긴다.
+          // 이때 파일명은 원래의 이름 대신 UUID로 생성한 이름이다.
+          item.write(new File(dirPath + "/" + filename));
+        }
+      }
+
+
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
 
