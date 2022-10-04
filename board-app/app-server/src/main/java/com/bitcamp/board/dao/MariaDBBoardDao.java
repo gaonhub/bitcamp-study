@@ -30,7 +30,7 @@ public class MariaDBBoardDao implements BoardDao {
             "insert into app_board_file(filepath,bno) values(?,?)")) {
 
       // 게시글 제목과 내용을 app_board 테이블에 저장한다.
-      pstmt.setString(1, board.getTitle());
+      pstmt.setString(1 , board.getTitle());
       pstmt.setString(2, board.getContent());
       pstmt.setInt(3, board.getWriter().getNo());
       int count = pstmt.executeUpdate();
@@ -85,6 +85,21 @@ public class MariaDBBoardDao implements BoardDao {
       writer.setName(rs.getString("name"));
 
       board.setWriter(writer);
+
+      // 게시글 첨부파일 가져오기
+      try (PreparedStatement pstmt2 = con.prepareStatement(
+          "select bfno, filepath, bno from app_board_file where bno = " + no);
+          ResultSet rs2 = pstmt2.executeQuery()) {
+
+        ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
+        while (rs2.next()) {
+          AttachedFile file = new AttachedFile();
+          file.setNo(rs2.getInt("bfno"));
+          file.setFilepath(rs2.getString("filepath"));
+          attachedFiles.add(file);
+        }
+        board.setAttachedFiles(attachedFiles);
+      }
 
       return board;
     }
