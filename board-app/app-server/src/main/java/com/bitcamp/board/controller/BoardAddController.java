@@ -76,7 +76,7 @@ public class BoardAddController extends HttpServlet {
           String filename = UUID.randomUUID().toString();
 
           // 파일이름을 AttachedFile 객체에 담은 후 
-          // DB에 저장할 수 있도록 이름 컬렉션에 저장한다.
+          // DB에 저장할 수 있도록 컬렉션에 저장한다.
           attachedFiles.add(new AttachedFile(filename));
 
           // 임시 폴더에 저장된 파일을 옮길 폴더 경로 알아내기
