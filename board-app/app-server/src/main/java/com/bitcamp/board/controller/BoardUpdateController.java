@@ -44,16 +44,17 @@ public class BoardUpdateController extends HttpServlet {
       String dirPath = this.getServletContext().getRealPath("/board/files");
 
       for (FileItem item : items) {
-        if (item.isFormField()) {
+        if (item.isFormField()) { 
           String paramName = item.getFieldName();
           String paramValue = item.getString("UTF-8");
+
           switch (paramName) {
             case "no": board.setNo(Integer.parseInt(paramValue));
             case "title": board.setTitle(paramValue);
             case "content": board.setContent(paramValue);
           }
         } else {
-          // 첨부파일을 저자할 때 사용할 파일명을 생성한다.
+          // 첨부파일을 저장할 때 사용할 파일명을 생성한다.
           String filename = UUID.randomUUID().toString();
 
           // 지정한 위치에 생성한 이름으로 첨부파일을 저장한다.
