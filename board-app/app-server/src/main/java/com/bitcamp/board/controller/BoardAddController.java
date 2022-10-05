@@ -47,11 +47,10 @@ public class BoardAddController extends HttpServlet {
 
       // 임시 폴더에 저장된 첨부 파일을 옮길 폴더 경로 알아내기
       String dirPath = this.getServletContext().getRealPath("/board/files");
-
       Collection<Part> parts = request.getParts();
 
       for (Part part : parts) {
-        if (!part.getName().equals("files")) {
+        if (!part.getName().equals("files") || part.getSize() == 0) {
           continue;
         }
 
