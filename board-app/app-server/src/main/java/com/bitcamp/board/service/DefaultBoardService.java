@@ -7,11 +7,12 @@ import com.bitcamp.board.domain.Board;
 import com.bitcamp.transaction.TransactionManager;
 import com.bitcamp.transaction.TransactionStatus;
 
-public class DefaultBoardSerivce implements BoardService {
-  TransactionManager txManager;
+public class DefaultBoardService implements BoardService {
+
+  TransactionManager txManager; 
   BoardDao boardDao;
 
-  public DefaultBoardSerivce(BoardDao boardDao, TransactionManager txManager) {
+  public DefaultBoardService(BoardDao boardDao, TransactionManager txManager) {
     this.boardDao = boardDao;
     this.txManager = txManager;
   }
@@ -38,6 +39,7 @@ public class DefaultBoardSerivce implements BoardService {
   @Override
   public boolean update(Board board) throws Exception {
     TransactionStatus status = txManager.getTransaction();
+
     try {
       // 1) 게시글 변경
       if (boardDao.update(board) == 0) {
@@ -58,8 +60,8 @@ public class DefaultBoardSerivce implements BoardService {
   @Override
   public Board get(int no) throws Exception {
     // 이 메서드의 경우 하는 일이 없다.
-    // 그럼에도 불구하고 이렇게 하는 이유는 일과성을 위해서다.
-    // 즉 Controller는 Service 객체를 사용하고 Service 객체는 DAO를 사용하는 형식을
+    // 그럼에도 불구하고 이렇게 하는 이유는 일관성을 위해서다.
+    // 즉 Controller는 Service 객체를 사용하고 Service 객체는 DAO를 사용하는 형식을 
     // 지키기 위함이다.
     // 사용 규칙이 동일하면 프로그래밍을 이해하기 쉬워진다.
     return boardDao.findByNo(no);
@@ -74,6 +76,7 @@ public class DefaultBoardSerivce implements BoardService {
 
       // 2) 게시글 삭제
       boolean result = boardDao.delete(no) > 0;
+
       txManager.commit(status);
       return result;
 
@@ -94,8 +97,16 @@ public class DefaultBoardSerivce implements BoardService {
   }
 
   @Override
-  public boolean deleteAttachedFiles(int fileNo) throws Exception {
+  public boolean deleteAttachedFile(int fileNo) throws Exception {
     return boardDao.deleteFile(fileNo) > 0;
   }
 
 }
+
+
+
+
+
+
+
+

@@ -27,11 +27,8 @@ public class BoardFileDeleteController extends HttpServlet {
       throws ServletException, IOException {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-
-      // 첨부파일 정보를 가져온다.
       AttachedFile attachedFile = boardService.getAttachedFile(no); 
 
-      // 게시글의 작성자가 로그인 사용자인지 검사한다.
       Member loginMember = (Member) request.getSession().getAttribute("loginMember");
       Board board = boardService.get(attachedFile.getBoardNo()); 
 
@@ -39,8 +36,7 @@ public class BoardFileDeleteController extends HttpServlet {
         throw new Exception("게시글 작성자가 아닙니다.");
       }
 
-      // 첨부파일을 삭제한다.
-      if (!boardService.deleteAttachedFiles(no)) {
+      if (!boardService.deleteAttachedFile(no)) {
         throw new Exception("게시글 첨부파일을 삭제할 수 없습니다.");
       }
 

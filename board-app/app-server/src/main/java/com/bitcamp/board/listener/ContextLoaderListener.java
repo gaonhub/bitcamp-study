@@ -8,7 +8,7 @@ import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.dao.MariaDBBoardDao;
 import com.bitcamp.board.dao.MariaDBMemberDao;
 import com.bitcamp.board.dao.MemberDao;
-import com.bitcamp.board.service.DefaultBoardSerivce;
+import com.bitcamp.board.service.DefaultBoardService;
 import com.bitcamp.board.service.DefaultMemberService;
 import com.bitcamp.sql.DataSource;
 import com.bitcamp.transaction.TransactionManager;
@@ -24,7 +24,7 @@ public class ContextLoaderListener implements ServletContextListener {
       ServletContext ctx = sce.getServletContext();
 
       DataSource ds = new DataSource(
-          "org.mariadb.jdbc.Driver",
+          "org.mariadb.jdbc.Driver", 
           "jdbc:mariadb://localhost:3306/studydb",
           "study",
           "1111");
@@ -34,7 +34,7 @@ public class ContextLoaderListener implements ServletContextListener {
       BoardDao boardDao = new MariaDBBoardDao(ds);
       MemberDao memberDao = new MariaDBMemberDao(ds);
 
-      ctx.setAttribute("boardService", new DefaultBoardSerivce(boardDao, txManager));
+      ctx.setAttribute("boardService", new DefaultBoardService(boardDao, txManager));
       ctx.setAttribute("memberService", new DefaultMemberService(memberDao));
 
     } catch (Exception e) {

@@ -14,7 +14,6 @@ public class MariaDBBoardDao implements BoardDao {
 
   DataSource ds;
 
-  //DAO가 사용할 의존 객체 Connection을 생성자의 파라미터로 받는다.
   public MariaDBBoardDao(DataSource ds) {
     this.ds = ds;
   }
@@ -48,7 +47,7 @@ public class MariaDBBoardDao implements BoardDao {
         "select "
             + "   b.bno,"
             + "   b.title,"
-            + "   b.ds.getConnection()t,"
+            + "   b.cont,"
             + "   b.cdt,"
             + "   b.vw_cnt,"
             + "   m.mno,"
@@ -65,7 +64,7 @@ public class MariaDBBoardDao implements BoardDao {
       Board board = new Board();
       board.setNo(rs.getInt("bno"));
       board.setTitle(rs.getString("title"));
-      board.setContent(rs.getString("ds.getConnection()t"));
+      board.setContent(rs.getString("cont"));
       board.setCreatedDate(rs.getDate("cdt"));
       board.setViewCount(rs.getInt("vw_cnt"));
 

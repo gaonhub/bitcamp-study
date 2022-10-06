@@ -29,13 +29,18 @@ public class DataSource {
 
     // 현재 스레드의 보관소에서 DB 커넥션 객체를 꺼낸다.
     Connection con = conStore.get();
-    if (con == null) { // 현재 스레드 보관소에 커넥션 객체가 없다면, 
+    if (con == null) { // 현재 스레드 보관소에 커넥션 객체가 없다면,  
       con = DriverManager.getConnection(jdbcUrl, username, password); // 새로 생성
-      conStore.set(con); // 새로 만든 DB 커넥션 객체를 다음에 다시 사용할 수 잇도록 보관한다.
+      conStore.set(con); // 새로 만든 DB 커넥션 객체를 다음에 다시 사용할 수 있도록 보관한다.
       System.out.printf("%s=> Connection 객체 생성\n", currThread.getName());
     }
     return con;
   }
 
 }
+
+
+
+
+
 

@@ -14,7 +14,7 @@ public class TransactionManager {
     // 현재 스레드에서 사용할 DB 커넥션 객체를 꺼낸다.
     Connection con = ds.getConnection();
 
-    // 트랜잭션을 수행할 수 있도록 커밋 상태로 변경한다.
+    // 트랜잭션을 수행할 수 있도록 수동 커밋 상태로 변경한다.
     con.setAutoCommit(false);
 
     // 트랜잭션을 수행하는 동안 사용할 DB 커넥션 객체를 보관소에 담아서 리턴한다.
@@ -50,6 +50,4 @@ public class TransactionManager {
       }
     }
   }
-
-
 }
