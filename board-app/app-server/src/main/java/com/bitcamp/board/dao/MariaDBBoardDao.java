@@ -23,7 +23,7 @@ public class MariaDBBoardDao implements BoardDao {
   public int insert(Board board) throws Exception {
     try (
         PreparedStatement pstmt = ds.getConnection().prepareStatement(
-            "insert into app_board(title,ds.getConnection()t,mno) values(?,?,?)",
+            "insert into app_board(title,cont,mno) values(?,?,?)",
             Statement.RETURN_GENERATED_KEYS)) {
 
       // 게시글 제목과 내용을 app_board 테이블에 저장한다.
@@ -97,7 +97,7 @@ public class MariaDBBoardDao implements BoardDao {
   @Override
   public int update(Board board) throws Exception {
     try (PreparedStatement pstmt = ds.getConnection().prepareStatement(
-        "update app_board set title=?, ds.getConnection()t=? where bno=?")) {
+        "update app_board set title=?, cont=? where bno=?")) {
 
       pstmt.setString(1, board.getTitle());
       pstmt.setString(2, board.getContent());
