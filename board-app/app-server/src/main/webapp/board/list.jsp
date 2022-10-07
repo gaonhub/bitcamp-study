@@ -16,7 +16,7 @@ tr:hover {
 </head>
 <body>
   <h1>게시글(JSP + Servlet + EL + JSTL)</h1>
-  <a href='service/form'>새 글</a>
+  <a href='form'>새 글</a>
   <table border='1'>
     <tr>
       <th>번호</th>
