@@ -68,16 +68,17 @@ public class ContextLoaderListener implements ServletContextListener {
       ctx.setAttribute("/board/update", new BoardUpdateController(boardService));
       ctx.setAttribute("/board/delete", new BoardDeleteController(boardService));
 
+      ctx.setAttribute("/member/list", new MemberListController(memberService));
+      ctx.setAttribute("/member/detail", new MemberDetailController(memberService));
+      ctx.setAttribute("/member/form", new MemberFormController());
+      ctx.setAttribute("/member/add", new MemberAddController(memberService));
+      ctx.setAttribute("/member/update", new MemberUpdateController(memberService));
+      ctx.setAttribute("/member/delete", new MemberDeleteController(memberService));
+
       ctx.setAttribute("/auth/form", new LoginFormController());
       ctx.setAttribute("/auth/login", new LoginController(memberService));
       ctx.setAttribute("/auth/logout", new LogoutController());
 
-      ctx.setAttribute("/member/add", new MemberAddController(memberService));
-      ctx.setAttribute("/member/delete", new MemberDeleteController(memberService));
-      ctx.setAttribute("/member/detail", new MemberDetailController(memberService));
-      ctx.setAttribute("/member/form", new MemberFormController());
-      ctx.setAttribute("/member/list", new MemberListController(memberService));
-      ctx.setAttribute("/member/update", new MemberUpdateController(memberService));
 
       // 자바 코드로 서블릿 객체를 직접 생성하여 서버에 등록하기
       DispatcherServlet servlet = new DispatcherServlet();

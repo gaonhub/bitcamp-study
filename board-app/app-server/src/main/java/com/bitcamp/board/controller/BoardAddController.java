@@ -16,10 +16,9 @@ import com.bitcamp.servlet.Controller;
 public class BoardAddController implements Controller {
 
   BoardService boardService;
-
   public BoardAddController(BoardService boardService) {
     this.boardService = boardService;
-  }  
+  }
 
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -16,7 +16,6 @@ import com.bitcamp.servlet.Controller;
 public class BoardUpdateController implements Controller {
 
   BoardService boardService;
-
   public BoardUpdateController(BoardService boardService) {
     this.boardService = boardService;
   }

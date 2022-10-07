@@ -11,7 +11,6 @@ import com.bitcamp.servlet.Controller;
 public class LoginController implements Controller {
 
   MemberService memberService;
-
   public LoginController(MemberService memberService) {
     this.memberService = memberService;
   }
@@ -34,7 +33,6 @@ public class LoginController implements Controller {
     } else {
       cookie.setMaxAge(60 * 60 * 24 * 7); // 7일
     }
-
     response.addCookie(cookie); 
 
     request.setAttribute("member", member);

@@ -11,8 +11,6 @@ import com.bitcamp.servlet.Controller;
 public class BoardFileDeleteController implements Controller {
 
   BoardService boardService;
-
-
   public BoardFileDeleteController(BoardService boardService) {
     this.boardService = boardService;
   }

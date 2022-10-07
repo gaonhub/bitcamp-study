@@ -9,7 +9,6 @@ import com.bitcamp.servlet.Controller;
 public class MemberAddController implements Controller {
 
   MemberService memberService;
-
   public MemberAddController(MemberService memberService) {
     this.memberService = memberService;
   }

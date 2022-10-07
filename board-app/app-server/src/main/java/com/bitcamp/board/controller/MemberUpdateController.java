@@ -9,7 +9,6 @@ import com.bitcamp.servlet.Controller;
 public class MemberUpdateController implements Controller {
 
   MemberService memberService;
-
   public MemberUpdateController(MemberService memberService) {
     this.memberService = memberService;
   }
@@ -27,6 +26,7 @@ public class MemberUpdateController implements Controller {
     if (!memberService.update(member)) {
       throw new Exception("회원 변경 오류입니다!");
     }
+
     return "redirect:list";
   }
 }

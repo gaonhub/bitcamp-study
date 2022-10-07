@@ -9,13 +9,13 @@ import com.bitcamp.servlet.Controller;
 public class BoardDeleteController implements Controller {
 
   BoardService boardService;
-
   public BoardDeleteController(BoardService boardService) {
     this.boardService = boardService;
   }
 
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    request.setCharacterEncoding("UTF-8");
     int no = Integer.parseInt(request.getParameter("no"));
 
     Member loginMember = (Member) request.getSession().getAttribute("loginMember");
