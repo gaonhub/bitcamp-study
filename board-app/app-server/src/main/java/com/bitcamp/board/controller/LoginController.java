@@ -45,13 +45,10 @@ public class LoginController extends HttpServlet {
       response.addCookie(cookie); // 응답 헤더에 쿠키를 포함시킨다.
 
       request.setAttribute("member", member);
-
-      response.setContentType("text/html;charset=UTF-8");
-      request.getRequestDispatcher("/auth/loginResult.jsp").include(request, response);
+      request.setAttribute("viewName", "/auth/loginResult.jsp");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error.jsp").forward(request, response); 
     }
   }
 }

@@ -32,10 +32,15 @@ public class DispatcherServlet extends HttpServlet {
 
     // 페이지 컨트롤러를 실행한 후에 페이지 컨트롤러가 지정한 뷰 컴포넌트를 실행한다.
     String viewName = (String) req.getAttribute("viewName");
+
     if (viewName != null) { // 페이지 컨트롤러를 정상적으로 실행했다면,
+      if (viewName.startsWith("redirect:")) { // 예) "redirect:list"
+        resp.sendRedirect(viewName.substring(9)); // 예) "list" <-- 리다이렉트할 URL을 잘라낸다.
+        return;
 
-      req.getRequestDispatcher("/board/list.jsp").include(req, resp);
-
+      } else {
+        req.getRequestDispatcher("/board/list.jsp").include(req, resp);
+      }
     } else { // 페이지 컨트롤러를 실행하다가 오류가 발생했다면
       req.getRequestDispatcher("/error.jsp").forward(req, resp); 
     }
