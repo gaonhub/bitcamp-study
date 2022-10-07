@@ -35,7 +35,7 @@ public class BoardDeleteController extends HttpServlet {
         throw new Exception("게시글을 삭제할 수 없습니다.");
       }
 
-      request.setAttribute("viewName","redirect:list");
+      request.setAttribute("viewName", "redirect:list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);

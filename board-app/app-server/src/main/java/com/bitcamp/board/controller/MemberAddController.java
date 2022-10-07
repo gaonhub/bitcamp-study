@@ -32,6 +32,7 @@ public class MemberAddController extends HttpServlet {
       member.setPassword(request.getParameter("password"));
 
       memberService.add(member);
+
       request.setAttribute("viewName", "redirect:list");
 
     } catch (Exception e) {

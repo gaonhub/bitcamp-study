@@ -40,7 +40,7 @@ public class BoardFileDeleteController extends HttpServlet {
         throw new Exception("게시글 첨부파일을 삭제할 수 없습니다.");
       }
 
-      request.setAttribute("viewName", "redirect:detail?no="+ board.getNo());
+      request.setAttribute("viewName", "redirect:detail?no=" + board.getNo());
 
     } catch (Exception e) {
       request.setAttribute("exception", e);

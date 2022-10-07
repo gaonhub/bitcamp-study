@@ -29,7 +29,7 @@ public class MemberDeleteController extends HttpServlet {
         throw new Exception("회원 삭제 오류입니다!");
       }
 
-      request.setAttribute("viewName","redirect:list");
+      request.setAttribute("viewName", "redirect:list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
