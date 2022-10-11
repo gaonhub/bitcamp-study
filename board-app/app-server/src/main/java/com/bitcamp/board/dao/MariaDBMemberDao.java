@@ -5,15 +5,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import com.bitcamp.board.domain.Member;
 
-@Component
-//- 이 애노테이션을 붙이면 Spring IoC 컨테이너가 객체를 자동으로 생성할 것이다.
-//- 객체의 이름을 명시하지 않으면 
-//  클래스 이름(첫 알파벳은 소문자. 예: "defaultMemberService")을 사용하여 저장한다.
-//- 생성자의 파라미터가 있다면 해당 타입의 객체를 찾아 생성자를 호출할 때 주입할 것이다.
-//- 만약 생성자가 원하는 파라미터 값이 없다면 생성 예외가 발생한다.
+@Repository // DAO 역할을 수행하는 객체에 붙이는 애노테이션
 public class MariaDBMemberDao implements MemberDao {
 
   DataSource ds;
