@@ -5,12 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.board.service.MemberService;
 
 @Controller
+@RequestMapping("/auth/")
 public class AuthController {
 
   MemberService memberService;
@@ -18,13 +20,13 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @RequestMapping(value="/auth/form", method=RequestMethod.GET)
+  @GetMapping(value="form")
   public String form(HttpServletRequest request, HttpServletResponse response) throws Exception {
     return "/auth/form.jsp";
   }
 
   // 'value' 나 'path' 나 같다.
-  @RequestMapping(path="/auth/login", method=RequestMethod.POST)
+  @PostMapping("login")
   public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
     String email = request.getParameter("email");
     String password = request.getParameter("password");
@@ -48,7 +50,7 @@ public class AuthController {
     return "/auth/loginResult.jsp";
   }
 
-  @RequestMapping(value="/auth/logout", method=RequestMethod.GET)
+  @GetMapping("logout")
   public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
     HttpSession session = request.getSession();
     session.invalidate(); // 현재 세션을 무효화시킨다.
