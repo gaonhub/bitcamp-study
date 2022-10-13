@@ -10,7 +10,6 @@ import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.domain.AttachedFile;
 import com.bitcamp.board.domain.Board;
 
-
 @Service // 서비스 역할을 수행하는 객체에 붙이는 애노테이션
 public class DefaultBoardService implements BoardService {
 
@@ -31,6 +30,7 @@ public class DefaultBoardService implements BoardService {
     def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 
     TransactionStatus status = txManager.getTransaction(def);
+
     try {
       // 1) 게시글 등록
       if (boardDao.insert(board) == 0) {
@@ -91,6 +91,7 @@ public class DefaultBoardService implements BoardService {
     def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 
     TransactionStatus status = txManager.getTransaction(def);
+
     try {
       // 1) 첨부파일 삭제
       boardDao.deleteFiles(no);

@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.JstlView;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.board.service.MemberService;
 
-@Controller
+@Controller 
 @RequestMapping("/auth/")
 public class AuthController {
 
@@ -22,17 +20,23 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @GetMapping(value="form")
-  public View form() throws Exception {
-    return new JstlView("/auth/form.jsp");
+  // InternalResourceViewResolver 설정 전
+  //  @GetMapping("form") 
+  //  public View form() throws Exception {
+  //    return new JstlView("auth/form");
+  //  }
+
+  // InternalResourceViewResolver 설정 후
+  @GetMapping("form") 
+  public String form() throws Exception {
+    return "auth/form";
   }
 
-  // 'value' 나 'path' 나 같다.
-  @PostMapping("login")
+  @PostMapping("login") 
   public ModelAndView login(
       String email, 
       String password, 
-      String saveEmail,
+      String saveEmail, 
       HttpServletResponse response,
       HttpSession session) throws Exception {
 
@@ -50,15 +54,15 @@ public class AuthController {
     }
     response.addCookie(cookie); 
 
-    ModelAndView mv = new ModelAndView("/auth/loginResult.jsp");
+    ModelAndView mv = new ModelAndView("auth/loginResult");
     mv.addObject("member", member);
     return mv;
   }
 
-  @GetMapping("logout")
+  @GetMapping("logout") 
   public String logout(HttpSession session) throws Exception {
-    session.invalidate();
-    return "redirect:../../";
+    session.invalidate(); 
+    return "redirect:../../"; 
   }
 }
 

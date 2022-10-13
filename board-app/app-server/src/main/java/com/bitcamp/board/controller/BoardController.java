@@ -3,26 +3,25 @@ package com.bitcamp.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import com.bitcamp.board.domain.AttachedFile;
 import com.bitcamp.board.domain.Board;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.board.service.BoardService;
 
-// CRUD 요청을 처리하는 페이지 컨트롤러들을 한 개의 클래스로 합친다.
 @Controller
 @RequestMapping("/board/")
 public class BoardController {
@@ -35,15 +34,22 @@ public class BoardController {
     this.sc = sc;
   }
 
-  @GetMapping("form")  
-  public String form(HttpServletResponse response) throws Exception {
-    return "/board/form.jsp";
+  //  InternalResourceViewResolver 사용 전:
+  //
+  //  @GetMapping("form")
+  //  public String form() throws Exception {
+  //    return "board/form";
+  //  }
+
+  //  InternalResourceViewResolver 사용 후:
+  @GetMapping("form")
+  public void form() throws Exception {
   }
 
-  @PostMapping("add")
+  @PostMapping("add") 
   public String add(
       Board board,
-      @RequestParam("files") MultipartFile[] files,
+      MultipartFile[] files,
       HttpSession session) throws Exception {
 
     board.setAttachedFiles(saveAttachedFiles(files));
@@ -88,31 +94,29 @@ public class BoardController {
   }
 
   @GetMapping("list")
-  public ModelAndView list() throws Exception {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("boards", boardService.list());
-    mv.setViewName("/board/list.jsp");
-    return mv;
+  public void list(Model model) throws Exception {
+    model.addAttribute("boards", boardService.list());
+
   }
 
   @GetMapping("detail")
-  public ModelAndView detail(int no) throws Exception {
+  public Map detail(int no) throws Exception {
     Board board = boardService.get(no);
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다!");
     }
 
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("board", board);
-    mv.setViewName("/board/detail.jsp");
-    return mv;
+    Map map = new HashMap();
+    map.put("board", board);
+    return map;
   }
 
   @PostMapping("update")
   public String update(
       Board board,
       Part[] files,
-      HttpSession session) throws Exception {
+      HttpSession session) 
+          throws Exception {
 
     board.setAttachedFiles(saveAttachedFiles(files));
 
@@ -134,11 +138,11 @@ public class BoardController {
 
   @GetMapping("delete")
   public String delete(
-      int no,
-      HttpSession session) throws Exception {
+      int no, 
+      HttpSession session) 
+          throws Exception {
 
     checkOwner(no, session);
-
     if (!boardService.delete(no)) {
       throw new Exception("게시글을 삭제할 수 없습니다.");
     }

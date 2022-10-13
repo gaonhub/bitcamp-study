@@ -26,11 +26,10 @@ public class ContextLoaderListener implements ServletContextListener {
   public void contextInitialized(ServletContextEvent sce) {
     System.out.println("공유 자원을 준비 중!!");
     try {
-
       // 웹 기능이 포함된 스프링 IoC 컨테이너 준비
       AnnotationConfigWebApplicationContext iocContainer = 
           new AnnotationConfigWebApplicationContext();
-      iocContainer.register(AppConfig.class);
+      iocContainer.register(AppConfig.class);  // 자바 config 클래스(AppConfig)에 설정된 대로 객체를 생성한다.
 
       ServletContext ctx = sce.getServletContext();
 
@@ -40,28 +39,28 @@ public class ContextLoaderListener implements ServletContextListener {
       config.addMapping("/service/*");
       config.setMultipartConfig(new MultipartConfigElement(
           this.getClass().getAnnotation(MultipartConfig.class)));
-      config.setLoadOnStartup(1); // 웹 애플리케이션을 시작할 때 프론트 컨트롤러를 자동 생성
+      config.setLoadOnStartup(1); // 웹 애플리케이션을 시작할 때 프론트 컨트롤러를 자동 생성.
 
       // 필터 등록
       CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8");
       FilterRegistration.Dynamic filterConfig = ctx.addFilter("CharacterEncodingFilter", filter);
       filterConfig.addMappingForServletNames(
-          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE),
-          false,
+          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE), 
+          false, 
           "DispatcherServlet");
 
       AdminCheckFilter adminFilter = new AdminCheckFilter();
       FilterRegistration.Dynamic adminFilterConfig = ctx.addFilter("AdminCheckFilter", adminFilter);
       adminFilterConfig.addMappingForUrlPatterns(
-          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE),
-          false,
+          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE), 
+          false, 
           "/service/member/*");
 
       LoginCheckFilter loginFilter = new LoginCheckFilter();
       FilterRegistration.Dynamic loginFilterConfig = ctx.addFilter("LoginCheckFilter", loginFilter);
       loginFilterConfig.addMappingForUrlPatterns(
-          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE),
-          false,
+          EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE), 
+          false, 
           "/service/*");
 
     } catch (Exception e) {
