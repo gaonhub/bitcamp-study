@@ -1,10 +1,11 @@
 package com.bitcamp.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.bitcamp.board.domain.AttachedFile;
 import com.bitcamp.board.domain.Board;
 import com.bitcamp.board.domain.Member;
@@ -25,45 +27,61 @@ import com.bitcamp.board.service.BoardService;
 @RequestMapping("/board/")
 public class BoardController {
 
+  ServletContext sc;
   BoardService boardService;
-  public BoardController(BoardService boardService) {
+
+  public BoardController(BoardService boardService, ServletContext sc) {
     this.boardService = boardService;
+    this.sc = sc;
   }
 
-  @GetMapping("form")
+  @GetMapping("form")  
   public String form(HttpServletResponse response) throws Exception {
     return "/board/form.jsp";
   }
 
   @PostMapping("add")
   public String add(
-      @RequestParam("title") String title, 
-      @RequestParam("content") String content,
-      HttpServletRequest request,
+      Board board,
+      @RequestParam("files") MultipartFile[] files,
       HttpSession session) throws Exception {
-    Board board = new Board();
-    board.setTitle(title);
-    board.setContent(content);
-    board.setAttachedFiles(saveAttachedFiles(request));
+
+    board.setAttachedFiles(saveAttachedFiles(files));
     board.setWriter((Member) session.getAttribute("loginMember"));
 
     boardService.add(board);
     return "redirect:list";
   }
 
-  private List<AttachedFile> saveAttachedFiles(HttpServletRequest request)
+  private List<AttachedFile> saveAttachedFiles(Part[] files)
       throws IOException, ServletException {
     List<AttachedFile> attachedFiles = new ArrayList<>();
-    String dirPath = request.getServletContext().getRealPath("/board/files");
-    Collection<Part> parts = request.getParts();
+    String dirPath = sc.getRealPath("/board/files");
 
-    for (Part part : parts) {
-      if (!part.getName().equals("files") || part.getSize() == 0) {
+    for (Part part : files) {
+      if (part.getSize() == 0) {
         continue;
       }
 
       String filename = UUID.randomUUID().toString();
       part.write(dirPath + "/" + filename);
+      attachedFiles.add(new AttachedFile(filename));
+    }
+    return attachedFiles;
+  }
+
+  private List<AttachedFile> saveAttachedFiles(MultipartFile[] files)
+      throws IOException, ServletException {
+    List<AttachedFile> attachedFiles = new ArrayList<>();
+    String dirPath = sc.getRealPath("/board/files");
+
+    for (MultipartFile part : files) {
+      if (part.isEmpty()) {
+        continue;
+      }
+
+      String filename = UUID.randomUUID().toString();
+      part.transferTo(new File(dirPath + "/" + filename));
       attachedFiles.add(new AttachedFile(filename));
     }
     return attachedFiles;
@@ -76,7 +94,7 @@ public class BoardController {
   }
 
   @GetMapping("detail")
-  public String detail(@RequestParam("no") int no,
+  public String detail(int no,
       HttpServletRequest request) 
           throws Exception {
     Board board = boardService.get(no);
@@ -91,16 +109,11 @@ public class BoardController {
 
   @PostMapping("update")
   public String update(
-      @RequestParam("no") int no,
-      @RequestParam("title") String title,
-      @RequestParam("content") String content,
-      HttpServletRequest request,
+      Board board,
+      Part[] files,
       HttpSession session) throws Exception {
-    Board board = new Board();
-    board.setNo(no);
-    board.setTitle(title);
-    board.setContent(content);
-    board.setAttachedFiles(saveAttachedFiles(request));
+
+    board.setAttachedFiles(saveAttachedFiles(files));
 
     checkOwner(board.getNo(), session);
 
@@ -120,7 +133,7 @@ public class BoardController {
 
   @GetMapping("delete")
   public String delete(
-      @RequestParam("no") int no,
+      int no,
       HttpSession session) throws Exception {
 
     checkOwner(no, session);
@@ -134,7 +147,7 @@ public class BoardController {
 
   @GetMapping("fileDelete")
   public String fileDelete(
-      @RequestParam("no") int no,
+      int no,
       HttpSession session) 
           throws Exception {
 
