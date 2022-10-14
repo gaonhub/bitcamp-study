@@ -12,12 +12,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-//스프링 IoC 컨테이너의 설정을 수행하는 클래스
-//1) DB 커넥션 객체 관리자 준비 : DataSource
-//2) 트랜잭션 관리자 준비: PlatformTransactionManager
-//3) 어떤 패키지의 있는 객체를 자동으로 생성할 것인지 지정한다.
-//
-
 @ComponentScan(value="com.bitcamp.board")
 public class AppConfig {
 
@@ -25,7 +19,7 @@ public class AppConfig {
     System.out.println("AppConfig() 생성자 호출됨!");
   }
 
-  // @Bean 애노테이션을 붙일 때 객체 이름을 지정하면
+  // @Bean 애노테이션을 붙일 때 객체 이름을 지정하면 
   // 그 이름으로 리턴 값을 컨테이너에 보관한다.
   // 이름을 지정하지 않으면 메서드 이름으로 보관한다.
   //  @Bean("transactionManager")
@@ -56,7 +50,7 @@ public class AppConfig {
   @Bean
   public ViewResolver viewResolver() {
     InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-    viewResolver.setViewClass(JstlView.class); // 주어진 URL을 처리할 객체 => JSP를 실행시켜주는 
+    viewResolver.setViewClass(JstlView.class); // 주어진 URL을 처리할 객체 => JSP를 실행시키주는 객체
     viewResolver.setPrefix("/WEB-INF/jsp/");
     viewResolver.setSuffix(".jsp");
     return viewResolver;
