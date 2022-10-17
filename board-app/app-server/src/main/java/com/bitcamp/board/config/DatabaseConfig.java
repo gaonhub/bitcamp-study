@@ -28,7 +28,6 @@ public class DatabaseConfig {
     ds.setPassword("1111");
     return ds;
   }
-
 }
 
 

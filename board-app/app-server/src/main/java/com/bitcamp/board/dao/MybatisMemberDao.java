@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.bitcamp.board.domain.Member;
 
-@Repository
+@Repository 
 public class MybatisMemberDao implements MemberDao {
 
   @Autowired DataSource ds;
@@ -95,7 +95,7 @@ public class MybatisMemberDao implements MemberDao {
       paramMap.put("password", password);
 
       return sqlSession.selectOne(
-          "MemberDao.findByEmailPassword", // SQL 문의 ID
+          "MemberDao.findByEmailPassword", // SQL 문의 ID 
           paramMap // SQL 문의 in-parameter(#{})에 들어 갈 값을 담고 있는 객체
           );
     }

@@ -5,20 +5,20 @@
 <mapper namespace="MemberDao">
 
   <insert id="insert" parameterType="com.bitcamp.board.domain.Member">
-    insert into app_member(name,email,pwd)
+    insert into app_member(name,email,pwd) 
     values(#{name},#{email},sha2(#{password},256))
   </insert>
-  
+
   <select id="findByNo" resultType="com.bitcamp.board.domain.Member">
-	  select 
-	    mno no,
-	    name,
-	    email,
-	    cdt createdDate 
-	  from 
-	    app_member 
-	  where 
-	    mno=#{value}
+    select 
+      mno no,
+      name,
+      email,
+      cdt createdDate
+    from 
+      app_member 
+    where 
+      mno=#{value}
   </select>
   
   <select id="findAll" resultType="com.bitcamp.board.domain.Member">
@@ -43,5 +43,8 @@
     where 
       email=#{email} and pwd=sha2(#{password},256)
   </select>
-  
+
 </mapper>
+
+
+

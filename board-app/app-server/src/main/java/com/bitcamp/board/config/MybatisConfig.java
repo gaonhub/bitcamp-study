@@ -24,10 +24,10 @@ public class MybatisConfig {
     // Mybatis의 Log4j2 기능 활성화시키기
     LogFactory.useLog4J2Logging();
 
-    // SqlSessionFactory 객체를 만들어 줄 객체를 준비한다.
+    // SqlSessionFactory 를 만들어 줄 객체를 준비한다. 
     SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 
-    // Mybatis가 사용할 DB 커넥션풀을 설정한다.
+    // Mybatis가 사용할 DB 커넥션풀을 설정한다. 
     factoryBean.setDataSource(ds);
 
     // Mybatis가 실행할 SQL 문이 들어 있는 파일의 위치를 설정한다.
