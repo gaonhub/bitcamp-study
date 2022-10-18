@@ -12,7 +12,7 @@
     <result column="cdt" property="createdDate"/>
   </resultMap>
 
-  <insert id="insert" parameterType="com.bitcamp.board.domain.Member">
+  <insert id="insert" parameterType="member">
     insert into app_member(name,email,pwd) 
     values(#{name},#{email},sha2(#{password},256))
   </insert>
@@ -51,7 +51,7 @@
     where 
       email=#{email} and pwd=sha2(#{password},256)
   </select>
-
+  
   <update id="update" parameterType="Member">
     update app_member set 
       name=#{name}, 
@@ -60,7 +60,7 @@
     where 
       mno=#{no}
   </update>
-
+  
   <delete id="delete">
     delete from app_member 
     where mno=#{value}
