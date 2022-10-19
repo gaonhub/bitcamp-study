@@ -76,7 +76,7 @@
     where 
       bno = #{value}
   </select>
-  
+
   <insert id="insert" parameterType="board"
           useGeneratedKeys="true" keyColumn="bno" keyProperty="no">
     insert into app_board(title,cont,mno) 
