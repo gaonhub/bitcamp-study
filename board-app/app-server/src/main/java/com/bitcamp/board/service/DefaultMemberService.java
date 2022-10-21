@@ -8,7 +8,7 @@ import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.dao.MemberDao;
 import com.bitcamp.board.domain.Member;
 
-@Service
+@Service 
 public class DefaultMemberService implements MemberService {
 
   @Autowired

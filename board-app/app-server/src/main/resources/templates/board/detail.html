@@ -17,7 +17,7 @@
   <tr>
     <th>제목</th><td><input name='title' type='text' 
         value='제목'
-        data-th-value="${board.title}"
+        data-th-value='${board.title}' 
         size='60'></td>
   </tr>
   <tr>
@@ -39,10 +39,10 @@
       <ul>
         <li data-th-each="file : ${board.attachedFiles}">
           <a href="files/test.gif"
-            data-th-href="@{files/{path}(path=${file.filepath})}"
-            data-th-text="${file.filepath}">text.gif</a>
+             data-th-href="@{files/{path}(path=${file.filepath})}"
+             data-th-text="${file.filepath}">test.gif</a>
           [<a href="fileDelete?no=1"
-            data-th-href="@{fileDelete(no=${file.no})}">삭제</a>]
+              data-th-href="@{fileDelete(no=${file.no})}">삭제</a>]
         </li>
       </ul>
       파일 추가: <input name='files' type="file" multiple>
@@ -52,7 +52,7 @@
 <p>
   <button type='submit'>변경</button>
   <a href='delete?no=1'
-    data-th-href="@{delete(no=${board.no})}">삭제</a>
+     data-th-href="@{delete(no=${board.no})}">삭제</a>
   <a href='list'>목록</a>
 </p>
 </form>
