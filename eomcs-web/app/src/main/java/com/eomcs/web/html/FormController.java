@@ -33,7 +33,7 @@ public class FormController {
   public Object exam11(String name, int age, MultipartFile photo) {
     System.out.println(name);
     System.out.println(age);
-    System.out.println(photo.getOriginalFilename());
+    System.out.println(photo.getOriginalFilename()); 
 
     try {
       File photoFile = new File("c:/upload/" + photo.getOriginalFilename());
